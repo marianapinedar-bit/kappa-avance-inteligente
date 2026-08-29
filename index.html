@@ -1748,7 +1748,13 @@ async function callVisionAPI(muro, apiImage){
     throw new Error('No se pudo contactar el servicio de IA. Verifica que AI_PROXY_URL esté configurada correctamente y que el proxy esté desplegado.');
   }
   if(!response.ok){
-    throw new Error('El servicio de IA respondió con un error (código '+response.status+'). Intenta nuevamente en unos segundos.');
+    let detail = '';
+    try{
+      const errBody = await response.json();
+      detail = (errBody && errBody.error && (errBody.error.message || errBody.error)) || '';
+      if(typeof detail!=='string') detail = JSON.stringify(detail);
+    }catch(e){ /* respuesta no era JSON, se ignora */ }
+    throw new Error('El servicio de IA respondió con un error (código '+response.status+ (detail? ': '+detail : '')+').');
   }
   const data = await response.json();
   const textBlocks = (data.content||[]).filter(function(b){return b.type==='text';}).map(function(b){return b.text;});
