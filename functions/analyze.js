@@ -41,13 +41,19 @@ export async function onRequestPost(context) {
 
   let anthropicResponse;
   try {
+    const headers = {
+      'Content-Type': 'application/json',
+      'x-api-key': apiKey,
+      'anthropic-version': '2023-06-01',
+    };
+    // Algunas API keys quedan ligadas a un workspace y exigen este header.
+    // Configura ANTHROPIC_WORKSPACE_ID como variable de entorno si tu key lo pide.
+    if (env.ANTHROPIC_WORKSPACE_ID) {
+      headers['anthropic-workspace-id'] = env.ANTHROPIC_WORKSPACE_ID;
+    }
     anthropicResponse = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': apiKey,
-        'anthropic-version': '2023-06-01',
-      },
+      headers: headers,
       body: JSON.stringify(body),
     });
   } catch (err) {
