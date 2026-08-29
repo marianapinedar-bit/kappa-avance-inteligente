@@ -1,0 +1,2681 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KAPPA · Avance Inteligente</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* =========================================================
+   KAPPA · AVANCE INTELIGENTE — DESIGN TOKENS
+   Blueprint navy + safety orange + concrete gray.
+   Inspired by construction drawings, site signage and
+   measurement instruments. Deliberately unrounded, quiet,
+   high legibility, minimal motion.
+   ========================================================= */
+:root{
+  --ink-900:#0F2436;
+  --ink-800:#152F45;
+  --ink-700:#1C3A52;
+  --ink-600:#274A66;
+  --steel-500:#5A7184;
+  --steel-400:#7C8FA0;
+  --steel-300:#A7B4BF;
+  --concrete-200:#E3E7EA;
+  --concrete-100:#ECEEF0;
+  --concrete-50:#F6F7F8;
+  --paper:#FFFFFF;
+  --line-200:#DCE1E5;
+  --line-300:#C7CED3;
+
+  --safety-600:#C8611E;
+  --safety-500:#E8752C;
+  --safety-100:#FCE7D4;
+
+  --validate-700:#215F44;
+  --validate-600:#2E7D5B;
+  --validate-100:#DDEEE4;
+
+  --alert-700:#8F2A2A;
+  --alert-600:#C23B3B;
+  --alert-100:#F7DEDE;
+
+  --confidence-700:#1D4C7A;
+  --confidence-600:#2563A6;
+  --confidence-100:#DCE8F3;
+
+  --amber-600:#B8860B;
+  --amber-100:#F5EBD0;
+
+  --font-display:'Space Grotesk', sans-serif;
+  --font-body:'Inter', sans-serif;
+  --font-mono:'IBM Plex Mono', monospace;
+
+  --radius-sm:3px;
+  --radius-md:5px;
+  --radius-lg:8px;
+
+  --shadow-card:0 1px 2px rgba(15,36,54,0.06), 0 1px 0 rgba(15,36,54,0.04);
+  --shadow-pop:0 8px 24px rgba(15,36,54,0.16), 0 2px 6px rgba(15,36,54,0.08);
+
+  --sidebar-w:248px;
+}
+
+*,*::before,*::after{box-sizing:border-box;}
+html,body{height:100%;}
+body{
+  margin:0;
+  background:var(--concrete-100);
+  color:var(--ink-900);
+  font-family:var(--font-body);
+  font-size:14px;
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{
+  font-family:var(--font-display);
+  margin:0;
+  letter-spacing:-0.01em;
+  color:var(--ink-900);
+}
+p{margin:0;}
+button{font-family:inherit;}
+a{color:inherit;}
+::selection{background:var(--safety-100);}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible{
+  outline:2px solid var(--confidence-600);
+  outline-offset:2px;
+}
+
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+}
+
+.mono{font-family:var(--font-mono);}
+
+/* Icon sprites: sane default size, overridden per-context below with
+   higher-specificity ".context .icn svg" rules so source order never matters. */
+.icn{display:inline-flex; align-items:center; justify-content:center; flex:none; vertical-align:-2px;}
+.icn svg{width:14px; height:14px; display:block;}
+
+/* ---------- APP SHELL ---------- */
+#app{display:flex; min-height:100vh;}
+
+.sidebar{
+  width:var(--sidebar-w);
+  flex:0 0 var(--sidebar-w);
+  background:var(--ink-900);
+  color:#EAF0F4;
+  display:flex;
+  flex-direction:column;
+  position:sticky;
+  top:0;
+  height:100vh;
+}
+.sidebar-brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:22px 20px 18px;
+  border-bottom:1px solid rgba(255,255,255,0.08);
+}
+.brand-mark{
+  width:34px;height:34px;
+  border:1.5px solid var(--safety-500);
+  border-radius:var(--radius-sm);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-display);
+  font-weight:700;
+  font-size:15px;
+  color:var(--safety-500);
+  flex:none;
+  position:relative;
+}
+.brand-mark::after{
+  content:"";
+  position:absolute; inset:5px;
+  border:1px solid rgba(232,117,44,0.35);
+}
+.brand-text{display:flex; flex-direction:column; line-height:1.2;}
+.brand-text .name{font-family:var(--font-display); font-weight:700; font-size:15.5px; letter-spacing:0.02em;}
+.brand-text .sub{font-size:10.5px; color:var(--steel-300); font-family:var(--font-mono); letter-spacing:0.03em; margin-top:2px;}
+
+.sidebar-project{
+  padding:14px 20px;
+  border-bottom:1px solid rgba(255,255,255,0.08);
+}
+.sidebar-project .label{font-size:10px; text-transform:uppercase; letter-spacing:0.08em; color:var(--steel-300); font-family:var(--font-mono);}
+.sidebar-project .value{font-size:13px; margin-top:4px; color:#EAF0F4; font-weight:500;}
+
+.sidebar-nav{flex:1; padding:10px 10px; overflow-y:auto;}
+.nav-item{
+  display:flex; align-items:center; gap:11px;
+  padding:9px 12px;
+  border-radius:var(--radius-sm);
+  color:#C7D3DB;
+  font-size:13px;
+  font-weight:500;
+  cursor:pointer;
+  border:none;
+  background:transparent;
+  width:100%;
+  text-align:left;
+  margin-bottom:2px;
+  transition:background 0.12s ease, color 0.12s ease;
+}
+.nav-item:hover{background:rgba(255,255,255,0.06); color:#fff;}
+.nav-item.active{background:var(--safety-500); color:#1A0D02; font-weight:600;}
+.nav-item .icn svg{width:16px; height:16px; stroke:#C7D3DB;}
+.nav-item.active .icn svg{stroke:#1A0D02;}
+.nav-item:hover .icn svg{stroke:#fff;}
+.nav-num{font-family:var(--font-mono); font-size:10px; color:var(--steel-400); width:14px; flex:none;}
+
+.sidebar-foot{
+  padding:14px 20px 18px;
+  border-top:1px solid rgba(255,255,255,0.08);
+  font-size:11px;
+  color:var(--steel-400);
+  font-family:var(--font-mono);
+  line-height:1.6;
+}
+.sidebar-foot b{color:var(--steel-300);}
+
+.main-col{flex:1; min-width:0; display:flex; flex-direction:column;}
+
+.topbar{
+  position:sticky; top:0; z-index:20;
+  display:flex; align-items:center; justify-content:space-between;
+  gap:16px;
+  padding:14px 28px;
+  background:rgba(246,247,248,0.92);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--line-200);
+}
+.topbar-crumbs{font-family:var(--font-mono); font-size:11.5px; color:var(--steel-500); letter-spacing:0.02em;}
+.topbar-crumbs .sep{margin:0 6px; color:var(--line-300);}
+.topbar-title{font-family:var(--font-display); font-weight:700; font-size:19px; margin-top:2px;}
+.topbar-right{display:flex; align-items:center; gap:10px;}
+
+.user-chip{
+  display:flex; align-items:center; gap:8px;
+  padding:6px 10px 6px 6px;
+  background:var(--paper);
+  border:1px solid var(--line-200);
+  border-radius:20px;
+}
+.user-avatar{
+  width:24px;height:24px;border-radius:50%;
+  background:var(--confidence-600); color:#fff;
+  display:flex; align-items:center; justify-content:center;
+  font-size:10.5px; font-weight:700; font-family:var(--font-display);
+}
+.user-chip .who{font-size:12px; font-weight:600;}
+.user-chip .role{font-size:10px; color:var(--steel-500);}
+
+main.view{padding:24px 28px 56px; max-width:1280px;}
+
+/* ---------- PRIMITIVES ---------- */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  font-family:var(--font-body); font-weight:600; font-size:13px;
+  padding:10px 18px;
+  border-radius:var(--radius-sm);
+  border:1px solid transparent;
+  cursor:pointer;
+  transition:filter 0.12s ease, background 0.12s ease, border-color .12s ease;
+  white-space:nowrap;
+}
+.btn:active{filter:brightness(0.94);}
+.btn-primary{background:var(--safety-500); color:#1A0D02;}
+.btn-primary:hover{background:var(--safety-600); color:#fff;}
+.btn-primary:disabled{background:var(--concrete-200); color:var(--steel-400); cursor:not-allowed;}
+.btn-dark{background:var(--ink-900); color:#fff;}
+.btn-dark:hover{background:var(--ink-700);}
+.btn-outline{background:transparent; border-color:var(--line-300); color:var(--ink-800);}
+.btn-outline:hover{border-color:var(--ink-700); background:var(--concrete-50);}
+.btn-ghost{background:transparent; color:var(--steel-500); padding:10px 12px;}
+.btn-ghost:hover{color:var(--ink-900); background:var(--concrete-100);}
+.btn-danger{background:transparent; border-color:var(--alert-600); color:var(--alert-700);}
+.btn-danger:hover{background:var(--alert-100);}
+.btn-validate{background:var(--validate-600); color:#fff;}
+.btn-validate:hover{background:var(--validate-700);}
+.btn-sm{padding:6px 12px; font-size:12px;}
+.btn-block{width:100%;}
+.btn[disabled]{opacity:0.55; cursor:not-allowed;}
+
+.card{
+  background:var(--paper);
+  border:1px solid var(--line-200);
+  border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-card);
+}
+.card-pad{padding:20px;}
+.card-head{display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:14px;}
+.card-title{font-family:var(--font-display); font-weight:700; font-size:14.5px;}
+.card-title-row{display:flex; align-items:center; gap:8px;}
+.card-eyebrow{font-family:var(--font-mono); font-size:10.5px; letter-spacing:0.07em; text-transform:uppercase; color:var(--steel-500); margin-bottom:4px; display:block;}
+
+.grid{display:grid; gap:16px;}
+.grid-4{grid-template-columns:repeat(4,1fr);}
+.grid-3{grid-template-columns:repeat(3,1fr);}
+.grid-2{grid-template-columns:repeat(2,1fr);}
+.grid-12{grid-template-columns:repeat(12,1fr);}
+@media (max-width:1080px){
+  .grid-4{grid-template-columns:repeat(2,1fr);}
+  .grid-3{grid-template-columns:repeat(2,1fr);}
+}
+
+.kpi-card{padding:16px 18px;}
+.kpi-eyebrow{font-family:var(--font-mono); font-size:10px; letter-spacing:0.06em; text-transform:uppercase; color:var(--steel-500);}
+.kpi-value{font-family:var(--font-display); font-weight:700; font-size:30px; margin-top:6px; display:flex; align-items:baseline; gap:5px;}
+.kpi-value .unit{font-size:14px; color:var(--steel-500); font-weight:500; font-family:var(--font-mono);}
+.kpi-foot{margin-top:8px; font-size:11.5px; color:var(--steel-500); display:flex; align-items:center; gap:6px;}
+.kpi-foot.up{color:var(--validate-700);}
+.kpi-foot.warn{color:var(--safety-600);}
+
+.badge{
+  display:inline-flex; align-items:center; gap:5px;
+  font-family:var(--font-mono); font-size:10.5px; font-weight:600;
+  padding:3px 8px;
+  border-radius:20px;
+  letter-spacing:0.02em;
+  text-transform:uppercase;
+  white-space:nowrap;
+}
+.badge-dot{width:6px; height:6px; border-radius:50%; flex:none;}
+.badge-pendiente{background:var(--amber-100); color:var(--amber-600);}
+.badge-pendiente .badge-dot{background:var(--amber-600);}
+.badge-validado{background:var(--validate-100); color:var(--validate-700);}
+.badge-validado .badge-dot{background:var(--validate-600);}
+.badge-ajustado{background:var(--confidence-100); color:var(--confidence-700);}
+.badge-ajustado .badge-dot{background:var(--confidence-600);}
+.badge-rechazado{background:var(--alert-100); color:var(--alert-700);}
+.badge-rechazado .badge-dot{background:var(--alert-600);}
+.badge-neutral{background:var(--concrete-200); color:var(--steel-500);}
+.badge-neutral .badge-dot{background:var(--steel-400);}
+
+.table-wrap{overflow-x:auto; border:1px solid var(--line-200); border-radius:var(--radius-md);}
+table{width:100%; border-collapse:collapse; font-size:12.5px; min-width:640px;}
+thead th{
+  text-align:left; font-family:var(--font-mono); font-weight:600; font-size:10.5px;
+  text-transform:uppercase; letter-spacing:0.05em; color:var(--steel-500);
+  background:var(--concrete-50); padding:10px 14px; border-bottom:1px solid var(--line-200);
+  white-space:nowrap;
+}
+tbody td{padding:11px 14px; border-bottom:1px solid var(--line-200); vertical-align:middle;}
+tbody tr:last-child td{border-bottom:none;}
+tbody tr:hover{background:var(--concrete-50);}
+td.num, th.num{text-align:right; font-family:var(--font-mono);}
+.row-link{cursor:pointer;}
+.cell-code{font-family:var(--font-mono); font-weight:600;}
+.cell-muted{color:var(--steel-500);}
+
+.progress-track{
+  height:7px; width:100%; background:var(--concrete-200); border-radius:20px; overflow:hidden; position:relative;
+}
+.progress-fill{height:100%; border-radius:20px; background:var(--safety-500); transition:width .5s cubic-bezier(.4,0,.2,1);}
+.progress-fill.validate{background:var(--validate-600);}
+.progress-fill.confidence{background:var(--confidence-600);}
+.progress-mark-prev{
+  position:absolute; top:-3px; bottom:-3px; width:2px; background:var(--ink-900); opacity:0.5;
+}
+
+.field{display:flex; flex-direction:column; gap:6px; margin-bottom:14px;}
+.field label{font-size:11.5px; font-weight:600; color:var(--ink-800); font-family:var(--font-mono); letter-spacing:0.02em; text-transform:uppercase;}
+.field .hint{font-size:11px; color:var(--steel-500); font-weight:400; text-transform:none; font-family:var(--font-body);}
+select,input[type=text],input[type=number],input[type=date],textarea{
+  font-family:var(--font-body); font-size:13.5px; color:var(--ink-900);
+  padding:10px 12px; border:1px solid var(--line-300); border-radius:var(--radius-sm);
+  background:var(--paper); width:100%;
+}
+select:disabled,input:disabled{background:var(--concrete-100); color:var(--steel-400); cursor:not-allowed;}
+textarea{resize:vertical; min-height:64px; font-family:var(--font-body);}
+
+.readonly-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:14px;}
+.readonly-item .rl-label{font-family:var(--font-mono); font-size:10px; text-transform:uppercase; letter-spacing:0.05em; color:var(--steel-500);}
+.readonly-item .rl-value{font-family:var(--font-display); font-weight:700; font-size:17px; margin-top:3px;}
+.readonly-item .rl-value.small{font-size:14px; font-family:var(--font-mono); font-weight:600;}
+
+.stepper{display:flex; align-items:center; gap:0; margin-bottom:26px;}
+.step-item{display:flex; align-items:center; gap:9px;}
+.step-dot{
+  width:26px;height:26px;border-radius:50%;
+  border:1.5px solid var(--line-300); color:var(--steel-500);
+  display:flex; align-items:center; justify-content:center;
+  font-family:var(--font-mono); font-size:11px; font-weight:600;
+  background:var(--paper); flex:none;
+}
+.step-item.done .step-dot{background:var(--validate-600); border-color:var(--validate-600); color:#fff;}
+.step-item.current .step-dot{background:var(--safety-500); border-color:var(--safety-500); color:#1A0D02;}
+.step-label{font-size:12px; font-weight:600; color:var(--steel-500);}
+.step-item.current .step-label{color:var(--ink-900);}
+.step-item.done .step-label{color:var(--ink-800);}
+.step-rule{width:38px; height:1px; background:var(--line-300); margin:0 8px;}
+
+.upload-zone{
+  border:1.5px dashed var(--line-300); border-radius:var(--radius-lg);
+  background:var(--concrete-50);
+  padding:44px 24px; text-align:center; cursor:pointer;
+  transition:border-color .12s ease, background .12s ease;
+}
+.upload-zone:hover, .upload-zone.drag{border-color:var(--safety-500); background:var(--safety-100);}
+.upload-zone .icn{margin:0 auto 14px;}
+.upload-zone .icn svg{width:40px; height:40px; stroke:var(--steel-500);}
+.upload-title{font-weight:600; font-size:14px;}
+.upload-sub{font-size:12px; color:var(--steel-500); margin-top:4px;}
+
+.evidence-preview{position:relative; border-radius:var(--radius-md); overflow:hidden; border:1px solid var(--line-200); background:var(--ink-900);}
+.evidence-preview img{display:block; width:100%; height:340px; object-fit:cover;}
+
+.scenario-options{display:grid; grid-template-columns:repeat(3,1fr); gap:10px;}
+.scenario-card{
+  border:1.5px solid var(--line-200); border-radius:var(--radius-md); padding:12px 14px; cursor:pointer;
+  background:var(--paper);
+}
+.scenario-card:hover{border-color:var(--steel-400);}
+.scenario-card.selected{border-color:var(--safety-500); background:var(--safety-100);}
+.scenario-card .sc-title{font-weight:600; font-size:12.5px; display:flex; align-items:center; gap:7px;}
+.scenario-card .sc-desc{font-size:11px; color:var(--steel-500); margin-top:4px; line-height:1.45;}
+
+/* --- analysis console (signature element) --- */
+.console-wrap{
+  background:var(--ink-900); border-radius:var(--radius-lg); padding:36px 30px;
+  color:#EAF0F4; text-align:center; position:relative; overflow:hidden;
+}
+.console-wrap::before{
+  content:""; position:absolute; inset:0;
+  background-image:linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+  background-size:26px 26px; pointer-events:none;
+}
+.console-frame{
+  width:180px; height:180px; margin:0 auto 26px; position:relative;
+}
+.console-frame svg{width:100%; height:100%;}
+.console-steps{max-width:360px; margin:0 auto; text-align:left; position:relative;}
+.console-step{display:flex; align-items:center; gap:10px; padding:7px 0; font-family:var(--font-mono); font-size:12.5px; color:var(--steel-300); opacity:0.45; transition:opacity .2s ease, color .2s ease;}
+.console-step.active{opacity:1; color:#fff;}
+.console-step.complete{opacity:0.85; color:var(--validate-100);}
+.console-step .cs-icon{width:15px; flex:none; text-align:center;}
+.console-label{font-family:var(--font-mono); font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--safety-500); margin-bottom:16px;}
+
+.result-grid{display:grid; grid-template-columns:1.1fr 1fr; gap:20px; align-items:start;}
+@media (max-width:980px){.result-grid{grid-template-columns:1fr;}}
+.photo-frame{position:relative; border-radius:var(--radius-lg); overflow:hidden; border:1px solid var(--line-200); background:var(--ink-900);}
+.photo-frame img{display:block; width:100%; height:420px; object-fit:cover; opacity:0.96;}
+.mask-overlay{position:absolute; left:0; right:0; bottom:0; pointer-events:none;}
+.corner{position:absolute; width:22px; height:22px; border-color:var(--safety-500); opacity:.9;}
+.corner.tl{top:12px; left:12px; border-top:2px solid; border-left:2px solid;}
+.corner.tr{top:12px; right:12px; border-top:2px solid; border-right:2px solid;}
+.corner.bl{bottom:12px; left:12px; border-bottom:2px solid; border-left:2px solid;}
+.corner.br{bottom:12px; right:12px; border-bottom:2px solid; border-right:2px solid;}
+.photo-tag{position:absolute; top:14px; left:14px; background:rgba(15,36,54,0.78); color:#fff; font-family:var(--font-mono); font-size:10.5px; padding:5px 9px; border-radius:3px; letter-spacing:0.03em;}
+.photo-tag.right{left:auto; right:14px; background:rgba(232,117,44,0.92); color:#1A0D02; font-weight:700;}
+
+.readout{font-family:var(--font-mono);}
+.readout-row{display:flex; align-items:baseline; justify-content:space-between; padding:11px 0; border-bottom:1px dashed var(--line-200);}
+.readout-row:last-child{border-bottom:none;}
+.readout-label{font-size:11.5px; text-transform:uppercase; letter-spacing:0.04em; color:var(--steel-500); font-family:var(--font-mono);}
+.readout-value{font-family:var(--font-display); font-weight:700; font-size:19px;}
+.readout-value.big{font-size:26px;}
+.readout-value .unit{font-family:var(--font-mono); font-size:12px; color:var(--steel-500); font-weight:500; margin-left:3px;}
+.readout-sub{font-size:10.5px; color:var(--steel-500); margin-top:2px; font-family:var(--font-body);}
+
+.alert-banner{
+  display:flex; gap:12px; align-items:flex-start;
+  padding:13px 16px; border-radius:var(--radius-md); margin-bottom:16px;
+  border:1px solid var(--alert-600); background:var(--alert-100); color:var(--alert-700);
+}
+.alert-banner.warn{border-color:var(--amber-600); background:var(--amber-100); color:#6b4d09;}
+.alert-banner .icn{flex:none; margin-top:1px;}
+.alert-banner .icn svg{width:18px; height:18px;}
+.alert-banner .at{font-weight:700; font-size:12.5px;}
+.alert-banner .ad{font-size:12px; margin-top:3px; line-height:1.5;}
+
+.notice-banner{
+  display:flex; gap:12px; align-items:flex-start;
+  padding:12px 16px; border-radius:var(--radius-md); margin-bottom:16px;
+  border:1px solid var(--confidence-600); background:var(--confidence-100); color:var(--confidence-700);
+  font-size:12px; line-height:1.5;
+}
+.notice-banner .icn{flex:none; margin-top:1px;}
+.notice-banner .icn svg{width:16px; height:16px;}
+
+.divider{height:1px; background:var(--line-200); margin:22px 0;}
+
+.tag-chip{
+  display:inline-flex; align-items:center; gap:6px; font-size:11.5px; font-weight:600;
+  padding:5px 10px; border-radius:20px; background:var(--concrete-100); color:var(--ink-800);
+  border:1px solid var(--line-200);
+}
+
+.empty-state{padding:44px 20px; text-align:center; color:var(--steel-500);}
+.empty-state .icn svg{width:34px; height:34px; stroke:var(--steel-400);}
+.empty-state .icn{margin-bottom:10px;}
+.empty-state .es-title{font-weight:600; color:var(--ink-800); font-size:13.5px; margin-bottom:4px;}
+
+.timeline{position:relative; padding-left:26px;}
+.timeline::before{content:""; position:absolute; left:8px; top:4px; bottom:4px; width:1.5px; background:var(--line-300);}
+.tl-item{position:relative; padding-bottom:22px;}
+.tl-item:last-child{padding-bottom:0;}
+.tl-dot{position:absolute; left:-26px; top:2px; width:17px; height:17px; border-radius:50%; background:var(--paper); border:2px solid var(--validate-600); display:flex; align-items:center; justify-content:center;}
+.tl-dot.pend{border-color:var(--amber-600);}
+.tl-dot.rej{border-color:var(--alert-600);}
+.tl-head{display:flex; align-items:center; gap:10px; flex-wrap:wrap;}
+.tl-date{font-family:var(--font-mono); font-size:11px; color:var(--steel-500);}
+
+.filters-row{display:flex; flex-wrap:wrap; gap:10px; margin-bottom:16px; align-items:flex-end;}
+.filters-row .field{margin-bottom:0; min-width:150px;}
+
+.chart-legend{display:flex; gap:14px; flex-wrap:wrap; margin-top:10px;}
+.chart-legend .lg-item{display:flex; align-items:center; gap:6px; font-size:11px; color:var(--steel-500);}
+.chart-legend .lg-swatch{width:9px; height:9px; border-radius:2px;}
+
+.toast{
+  position:fixed; bottom:22px; right:22px; z-index:100;
+  background:var(--ink-900); color:#fff; padding:14px 18px; border-radius:var(--radius-md);
+  box-shadow:var(--shadow-pop); font-size:13px; display:flex; align-items:center; gap:10px;
+  max-width:360px; animation:toast-in .25s ease;
+}
+.toast.success{border-left:3px solid var(--validate-600);}
+.toast.error{border-left:3px solid var(--alert-600);}
+@keyframes toast-in{from{transform:translateY(10px); opacity:0;} to{transform:translateY(0); opacity:1;}}
+
+.kv-inline{display:flex; align-items:center; gap:6px; font-size:12px;}
+.kv-inline .k{color:var(--steel-500);}
+.kv-inline .v{font-weight:600;}
+
+.pill-toggle{display:inline-flex; border:1px solid var(--line-300); border-radius:20px; overflow:hidden;}
+.pill-toggle button{border:none; background:var(--paper); padding:6px 13px; font-size:11.5px; font-weight:600; color:var(--steel-500); cursor:pointer;}
+.pill-toggle button.active{background:var(--ink-900); color:#fff;}
+
+.two-col{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+@media (max-width:900px){.two-col{grid-template-columns:1fr;}}
+
+.stat-mini{display:flex; flex-direction:column; gap:4px;}
+.stat-mini .sm-label{font-family:var(--font-mono); font-size:10px; text-transform:uppercase; color:var(--steel-500); letter-spacing:.05em;}
+.stat-mini .sm-value{font-family:var(--font-display); font-weight:700; font-size:20px;}
+
+.sidebar-toggle-btn{display:none;}
+.sidebar-backdrop{display:none;}
+@media (max-width:860px){
+  .sidebar{position:fixed; left:-260px; z-index:50; transition:left .2s ease;}
+  .sidebar.open{left:0;}
+  .sidebar-toggle-btn{display:inline-flex;}
+  .sidebar.open ~ .sidebar-backdrop, .sidebar-backdrop.open{display:block; position:fixed; inset:0; background:rgba(15,36,54,0.4); z-index:40;}
+  main.view{padding:18px 16px 48px;}
+  .topbar{padding:12px 16px;}
+  .readonly-grid{grid-template-columns:repeat(2,1fr);}
+  .result-grid,.two-col{grid-template-columns:1fr;}
+  .scenario-options{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+/* =========================================================
+   KAPPA · AVANCE INTELIGENTE
+   Prototipo funcional — control de avance de mampostería
+   apoyado en evidencia fotográfica y análisis por IA.
+   Todo el estado vive en memoria (sin backend, sin storage).
+   ========================================================= */
+
+/* ---------------------------------------------------------
+   UTILIDADES
+   --------------------------------------------------------- */
+let __uid = 1000;
+function uid(prefix){ __uid += 1; return (prefix||'R') + '-' + __uid; }
+
+function fmtArea(n){
+  if(n===null||n===undefined||isNaN(n)) return '—';
+  return (Math.round(n*10)/10).toLocaleString('es-CO',{minimumFractionDigits:1,maximumFractionDigits:1});
+}
+function fmtPct(n){
+  if(n===null||n===undefined||isNaN(n)) return '—';
+  return Math.round(n*10)/10;
+}
+function clamp(n,min,max){ return Math.max(min,Math.min(max,n)); }
+
+const MESES = ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+function fmtFecha(d){
+  return String(d.getDate()).padStart(2,'0')+' '+MESES[d.getMonth()]+' '+d.getFullYear();
+}
+function fmtFechaCorta(d){
+  return String(d.getDate()).padStart(2,'0')+'/'+String(d.getMonth()+1).padStart(2,'0');
+}
+function fmtHora(d){
+  return String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');
+}
+function daysAgo(n){ const d = new Date(NOW); d.setDate(d.getDate()-n); return d; }
+function escapeHtml(s){
+  return String(s===undefined||s===null?'':s).replace(/[&<>"']/g, function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+  });
+}
+
+const NOW = new Date('2026-08-27T10:20:00');
+
+/* ---------------------------------------------------------
+   ICONOS (sprites SVG mínimos, trazo único, sin relleno)
+   --------------------------------------------------------- */
+const ICN = {
+  dashboard:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>',
+  registrar:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>',
+  ia:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="7" width="16" height="12" rx="2"/><path d="M9 3.5h6M9 7v-2M15 7v-2"/><circle cx="9" cy="13" r="1.4"/><circle cx="15" cy="13" r="1.4"/><path d="M9 17h6"/></svg>',
+  pendientes:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></svg>',
+  historial:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/><path d="M12 8v4l3 2"/></svg>',
+  contratistas:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="8.5" cy="8" r="3"/><path d="M2.5 20a6 6 0 0 1 12 0"/><circle cx="17" cy="9" r="2.4"/><path d="M15.5 13.2a5 5 0 0 1 6 4.8"/></svg>',
+  elementos:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V9l8-5 8 5v12"/><path d="M9 21v-7h6v7"/><path d="M4 9l8 5 8-5"/></svg>',
+  reportes:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M11 20V4M18 20v-7"/></svg>',
+  upload:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4M7 9l5-5 5 5"/><path d="M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg>',
+  alert:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M12 9v4M12 16.5h.01"/><path d="M10.6 3.9 2.4 18a1.5 1.5 0 0 0 1.3 2.2h16.6a1.5 1.5 0 0 0 1.3-2.2L13.4 3.9a1.5 1.5 0 0 0-2.8 0Z"/></svg>',
+  info:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><circle cx="12" cy="12" r="9"/><path d="M12 11v5.5M12 8v.01"/></svg>',
+  check:'<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5.5 5.5L20 7"/></svg>',
+  x:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 5l14 14M19 5L5 19"/></svg>',
+  chevron:'<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>',
+  camera:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" width="40" height="40"><path d="M4 8h3l1.6-2.4A2 2 0 0 1 10.3 4.6h3.4a2 2 0 0 1 1.7 1L17 8h3a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2Z"/><circle cx="12" cy="13" r="3.4"/></svg>',
+  menu:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>',
+  wall:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V3h18v18"/><path d="M3 9h18M3 15h18M9 3v6M15 9v6M9 15v6"/></svg>',
+  building:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 21V5a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v16"/><path d="M3 21h18M9 8h1M14 8h1M9 12h1M14 12h1M9 16h1M14 16h1"/></svg>',
+};
+function icon(name,cls){ return '<span class="icn '+(cls||'')+'">'+ICN[name]+'</span>'; }
+
+/* ---------------------------------------------------------
+   MODELO DE DATOS — DEMO "PROYECTO PILOTO KAPPA"
+   --------------------------------------------------------- */
+const PROYECTO = { nombre:'Proyecto Piloto Kappa', ubicacion:'Rionegro, Antioquia' };
+/* Lista de proyectos disponibles para el flujo de registro flexible.
+   Empieza con el proyecto piloto; el usuario puede añadir nuevos desde
+   "Registrar avance → + Registrar nuevo elemento". */
+let PROYECTOS = [PROYECTO.nombre];
+
+const CONTRATISTAS = [
+  { id:'CT-01', nombre:'Construcciones ABC', actividad:'Mampostería', contacto:'J. Herrera · Residente contratista' },
+  { id:'CT-02', nombre:'Mampostería Pro', actividad:'Mampostería', contacto:'S. Londoño · Residente contratista' },
+  { id:'CT-03', nombre:'Constructora Delta', actividad:'Mampostería', contacto:'F. Ospina · Residente contratista' },
+];
+
+const RESPONSABLES = ['Ing. Camila Rojas','Ing. Andrés Pérez','Ing. Laura Gómez'];
+
+/* Definición base de muros. avanceValidado se ajustará en vivo para M-015. */
+const MUROS_BASE = [
+  { codigo:'M-001', zona:'Torre A', piso:'Piso 1', unidad:'Apto 101', contratista:'CT-01', largo:10, alto:2.0, avance:100 },
+  { codigo:'M-002', zona:'Torre A', piso:'Piso 2', unidad:'Apto 201', contratista:'CT-02', largo:8,  alto:3.0, avance:75  },
+  { codigo:'M-005', zona:'Torre A', piso:'Piso 2', unidad:'Apto 202', contratista:'CT-02', largo:7,  alto:3.0, avance:100 },
+  { codigo:'M-006', zona:'Torre A', piso:'Piso 3', unidad:'Apto 301', contratista:'CT-01', largo:9,  alto:2.5, avance:25  },
+  { codigo:'M-015', zona:'Torre A', piso:'Piso 3', unidad:'Apto 302', contratista:'CT-01', largo:8,  alto:3.0, avance:50  },
+  { codigo:'M-007', zona:'Torre A', piso:'Piso 4', unidad:'Apto 401', contratista:'CT-03', largo:6,  alto:3.0, avance:0   },
+  { codigo:'M-008', zona:'Torre A', piso:'Piso 5', unidad:'Apto 501', contratista:'CT-02', largo:10, alto:2.4, avance:60  },
+  { codigo:'M-003', zona:'Torre B', piso:'Piso 1', unidad:'Apto 101', contratista:'CT-03', largo:6,  alto:3.0, avance:50  },
+  { codigo:'M-004', zona:'Torre B', piso:'Piso 1', unidad:'Apto 102', contratista:'CT-01', largo:8,  alto:2.5, avance:75  },
+  { codigo:'M-009', zona:'Torre B', piso:'Piso 2', unidad:'Apto 201', contratista:'CT-02', largo:8,  alto:3.0, avance:100 },
+  { codigo:'M-010', zona:'Torre B', piso:'Piso 2', unidad:'Apto 202', contratista:'CT-03', largo:7,  alto:3.0, avance:40  },
+  { codigo:'M-011', zona:'Torre B', piso:'Piso 3', unidad:'Apto 301', contratista:'CT-01', largo:9,  alto:2.5, avance:90  },
+  { codigo:'M-012', zona:'Torre B', piso:'Piso 3', unidad:'Apto 302', contratista:'CT-02', largo:8,  alto:2.5, avance:0   },
+  { codigo:'M-013', zona:'Torre B', piso:'Piso 4', unidad:'Apto 401', contratista:'CT-03', largo:6,  alto:2.5, avance:100 },
+];
+
+/* Genera una imagen "fotografía" ilustrativa de un muro en construcción,
+   como SVG propio (no una foto real) — usada como evidencia de demostración
+   cuando el usuario no tiene una fotografía a mano, y como miniaturas de
+   historial. pct = porcentaje de mampostería visible desde la base. */
+function demoWallImage(pct, seedTone){
+  pct = clamp(pct,0,100);
+  const w=640,h=420;
+  const fillH = Math.round(h*(pct/100));
+  const tone = seedTone||0;
+  const brickRows = [];
+  const rowH = 22;
+  let y = h;
+  let rowIdx=0;
+  while(y > h-fillH-rowH){
+    const offset = (rowIdx%2===0)? 0 : -28;
+    let x = offset;
+    while(x < w+56){
+      brickRows.push('<rect x="'+x+'" y="'+(y-rowH)+'" width="54" height="'+(rowH-3)+'" rx="1.5" fill="rgb('+(176+((rowIdx*7+tone)%18))+','+(120+((rowIdx*5+tone)%16))+','+(92+((rowIdx*3+tone)%14))+')" stroke="rgba(60,35,20,0.35)" stroke-width="1"/>');
+      x += 56;
+    }
+    y -= rowH;
+    rowIdx++;
+  }
+  const exposedTop = h - fillH;
+  return 'data:image/svg+xml;utf8,'+encodeURIComponent(
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 '+w+' '+h+'">'
+    +'<defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">'
+    +'<stop offset="0" stop-color="#B8C4CC"/><stop offset="1" stop-color="#DDE3E7"/></linearGradient>'
+    +'<linearGradient id="fl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8C9BA6"/><stop offset="1" stop-color="#5E6E78"/></linearGradient></defs>'
+    +'<rect width="'+w+'" height="'+h+'" fill="url(#sky)"/>'
+    +'<rect x="0" y="'+(h-26)+'" width="'+w+'" height="26" fill="url(#fl)"/>'
+    +'<g>'+brickRows.join('')+'</g>'
+    +(pct<100? '<rect x="0" y="'+Math.max(0,exposedTop-96)+'" width="'+w+'" height="96" fill="#AEB9C0" opacity="0.5"/>'+
+      '<g stroke="#8A97A0" stroke-width="2">'+
+      Array.from({length:6}).map(function(_,i){var x=60+i*100; return '<line x1="'+x+'" y1="'+Math.max(0,exposedTop-96)+'" x2="'+x+'" y2="'+exposedTop+'"/>';}).join('')
+      +'</g>' : '')
+    +'</svg>'
+  );
+}
+
+/* ---------------------------------------------------------
+   CONSTRUCCIÓN DE MUROS + HISTORIAL SEMILLA
+   --------------------------------------------------------- */
+let MUROS = [];
+let REGISTROS = [];
+
+function stageSequence(avance){
+  if(avance<=0) return [];
+  const base = [25,50,75,100].filter(function(s){ return s<avance; });
+  base.push(avance);
+  return base;
+}
+
+/* ---------------------------------------------------------
+   CLASIFICACIÓN AUTOMÁTICA DEL RESULTADO (verde / amarillo / rojo)
+   Se usa tanto para los datos de demostración como para cada
+   resultado real devuelto por el servicio de IA.
+   --------------------------------------------------------- */
+function classify(pActual, pAnterior, requiereRevision, confianza){
+  if(pActual < pAnterior) return 'rojo';
+  const diff = pActual - pAnterior;
+  if(diff < 5 || requiereRevision || confianza < 70) return 'amarillo';
+  return 'verde';
+}
+
+const CLASIFICACION_META = {
+  verde:   { label:'Avance significativo', cls:'badge-validado' },
+  amarillo:{ label:'Avance marginal · revisar', cls:'badge-pendiente' },
+  rojo:    { label:'Posible inconsistencia', cls:'badge-rechazado' },
+};
+
+/* Textos de ejemplo para poblar los registros semilla con la misma forma
+   que devuelve el servicio de IA real (descripcion / limitaciones). */
+const DESCRIPCIONES_DEMO = [
+  'Se observa mampostería consolidada en la mayor parte del área visible, con hiladas uniformes.',
+  'La superficie muestra avance parcial; persisten secciones sin revestir hacia la parte superior del muro.',
+  'El plano fotografiado corresponde al elemento indicado; el avance es consistente con el registro anterior.',
+  'Se identifica una superficie mayormente terminada, con acabado uniforme en la totalidad del encuadre.',
+  'La imagen permite observar avance adicional respecto al último registro, concentrado en la mitad inferior.',
+];
+const LIMITACIONES_DEMO_POOL = [
+  'La iluminación lateral genera sombras sobre parte del muro.',
+  'El ángulo de toma no cubre por completo la esquina superior.',
+  'Un andamio cubre parcialmente la base del muro.',
+  'El encuadre no incluye la totalidad del elemento.',
+];
+
+function buildDemoData(){
+  MUROS = [];
+  REGISTROS = [];
+  let regCounter = 0;
+
+  MUROS_BASE.forEach(function(m, mi){
+    const areaTotal = Math.round(m.largo*m.alto*10)/10;
+    const muro = {
+      codigo:m.codigo, proyecto:PROYECTO.nombre, zona:m.zona, piso:m.piso, unidad:m.unidad,
+      ubicacion:m.zona+' – '+m.piso+' – '+m.unidad, notas:'',
+      actividad:'Mampostería', contratistaId:m.contratista,
+      largo:m.largo, alto:m.alto, areaTotal:areaTotal,
+      avanceValidado: m.avance, areaValidada: Math.round(areaTotal*(m.avance/100)*10)/10,
+      historial: [],
+    };
+
+    const stages = stageSequence(m.avance);
+    const recentOffset = 3 + ((mi*7) % 35); /* días desde hoy del último hito de este muro: 3–37 */
+    let prev = 0;
+    stages.forEach(function(stage, si){
+      const daysBack = recentOffset + (stages.length-1-si) * 17; /* hitos anteriores, más atrás en el tiempo */
+      const fecha = daysAgo(daysBack);
+      const areaEstim = Math.round(areaTotal*(stage/100)*10)/10;
+      const areaPrev = Math.round(areaTotal*(prev/100)*10)/10;
+      const nuevaCantidad = Math.round((areaEstim-areaPrev)*10)/10;
+      const ajustado = (si % 3 === 2);
+      const cantidadValidada = ajustado ? Math.max(0, Math.round((nuevaCantidad-0.3)*10)/10) : nuevaCantidad;
+      const confianza = 86 + ((mi*5+si*7) % 11);
+      const limitaciones = (si % 4 === 1) ? [LIMITACIONES_DEMO_POOL[(mi+si) % LIMITACIONES_DEMO_POOL.length]] : [];
+      const requiereRevision = ajustado || limitaciones.length>0;
+      regCounter++;
+      const reg = {
+        id: 'REG-' + (2000+regCounter),
+        fecha: fecha,
+        muroCodigo: muro.codigo,
+        contratistaId: muro.contratistaId,
+        avanceAnterior: prev,
+        avanceDetectado: stage,
+        confianza: confianza,
+        areaTotal: areaTotal,
+        areaEstimadaAcum: areaEstim,
+        nuevaCantidadEstimada: nuevaCantidad,
+        cantidadValidada: cantidadValidada,
+        estado: ajustado ? 'Ajustado' : 'Validado',
+        responsable: RESPONSABLES[(mi+si)%RESPONSABLES.length],
+        observaciones: ajustado ? 'Se ajustó cantidad tras verificación visual en sitio.' : '',
+        descripcion: DESCRIPCIONES_DEMO[(mi+si) % DESCRIPCIONES_DEMO.length],
+        limitaciones: limitaciones,
+        requiereRevision: requiereRevision,
+        clasificacion: classify(stage, prev, requiereRevision, confianza),
+        imagen: demoWallImage(stage, mi*17+si*3),
+        tiempoValidacionMin: 3 + ((mi*3+si*5) % 11),
+        origen:'seed',
+      };
+      muro.historial.push(reg);
+      REGISTROS.push(reg);
+      prev = stage;
+    });
+
+    MUROS.push(muro);
+  });
+
+  /* Recalcular avance validado real acumulado (suma de cantidadValidada) para
+     que quede consistente con la cadena de ajustes histórica. */
+  MUROS.forEach(function(muro){
+    let acumulado = 0;
+    muro.historial.forEach(function(r){ acumulado += r.cantidadValidada; });
+    muro.areaValidada = Math.round(clamp(acumulado,0,muro.areaTotal)*10)/10;
+    muro.avanceValidado = muro.areaTotal>0 ? Math.round((muro.areaValidada/muro.areaTotal)*1000)/10 : 0;
+  });
+
+  /* Registros PENDIENTES sembrados: análisis ya ejecutado, a la espera de
+     validación humana. No modifican todavía el avance validado del muro. */
+  const pendientesSeed = [
+    { muro:'M-002', detectado:88, confianza:90, dias:2, minutos:null },
+    { muro:'M-006', detectado:45, confianza:85, dias:1, minutos:null },
+    { muro:'M-010', detectado:55, confianza:88, dias:4, minutos:null },
+  ];
+  pendientesSeed.forEach(function(p, i){
+    const muro = MUROS.find(function(m){ return m.codigo===p.muro; });
+    if(!muro) return;
+    const areaEstim = Math.round(muro.areaTotal*(p.detectado/100)*10)/10;
+    const nuevaCantidad = Math.max(0, Math.round((areaEstim-muro.areaValidada)*10)/10);
+    const limitaciones = (i===1) ? [LIMITACIONES_DEMO_POOL[i % LIMITACIONES_DEMO_POOL.length]] : [];
+    regCounter++;
+    const reg = {
+      id:'REG-'+(2000+regCounter),
+      fecha: daysAgo(p.dias),
+      muroCodigo: muro.codigo,
+      contratistaId: muro.contratistaId,
+      avanceAnterior: muro.avanceValidado,
+      avanceDetectado: p.detectado,
+      confianza: p.confianza,
+      areaTotal: muro.areaTotal,
+      areaEstimadaAcum: areaEstim,
+      nuevaCantidadEstimada: nuevaCantidad,
+      cantidadValidada: null,
+      estado:'Pendiente',
+      responsable: RESPONSABLES[i%RESPONSABLES.length],
+      observaciones:'',
+      descripcion: DESCRIPCIONES_DEMO[(i+2) % DESCRIPCIONES_DEMO.length],
+      limitaciones: limitaciones,
+      requiereRevision: limitaciones.length>0,
+      clasificacion: classify(p.detectado, muro.avanceValidado, limitaciones.length>0, p.confianza),
+      imagen: demoWallImage(p.detectado, i*11+4),
+      tiempoValidacionMin: null,
+      origen:'seed',
+    };
+    muro.historial.push(reg);
+    REGISTROS.push(reg);
+  });
+
+  REGISTROS.sort(function(a,b){ return b.fecha-a.fecha; });
+}
+
+buildDemoData();
+
+function getMuro(codigo){ return MUROS.find(function(m){ return m.codigo===codigo; }); }
+function getContratista(id){ return CONTRATISTAS.find(function(c){ return c.id===id; }); }
+function contratistaNombre(id){ const c=getContratista(id); return c?c.nombre:id; }
+
+/* ---------------------------------------------------------
+   ESTADO GLOBAL DE LA APLICACIÓN (en memoria)
+   --------------------------------------------------------- */
+const STATE = {
+  view:'dashboard',
+  sidebarOpen:false,
+  flow:{
+    step:'seleccion',
+    modo:'existente', /* 'existente' | 'nuevo' */
+    zona:'', piso:'', muroCodigo:'',
+    imagen:null, imagenLabel:'',
+    resultado:null,
+    reviewingRegistroId:null,
+    analysisStartedAt:null,
+    analysisDoneAt:null,
+    analysisError:null,
+    showReject:false,
+  },
+  historial:{ zona:'', contratista:'', muro:'', estado:'', desde:'', hasta:'' },
+  elementos:{ zona:'', contratista:'', estado:'' },
+  detalleMuroCodigo:null,
+  contratistaDetalleId:null,
+  reportesRange:'todo',
+  toast:null,
+  auth:{ loggedIn:false, password:'', checking:false, error:null },
+};
+
+function resetFlow(prefill){
+  STATE.flow = {
+    step:'seleccion', modo:'existente', zona:'', piso:'', muroCodigo:'',
+    imagen:null, imagenLabel:'',
+    resultado:null, reviewingRegistroId:null,
+    analysisStartedAt:null, analysisDoneAt:null, analysisError:null, showReject:false,
+  };
+  if(prefill) Object.assign(STATE.flow, prefill);
+}
+
+function navigate(view, opts){
+  STATE.view = view;
+  STATE.sidebarOpen = false;
+  if(view==='registrar' && !(opts&&opts.keepFlow)) resetFlow(opts);
+  if(opts){
+    if(opts.detalleMuroCodigo!==undefined) STATE.detalleMuroCodigo = opts.detalleMuroCodigo;
+    if(opts.contratistaDetalleId!==undefined) STATE.contratistaDetalleId = opts.contratistaDetalleId;
+  }
+  window.scrollTo(0,0);
+  render();
+}
+
+function showToast(type,msg){
+  STATE.toast = {type:type,msg:msg};
+  render();
+  setTimeout(function(){ STATE.toast=null; var t=document.querySelector('.toast'); if(t) t.style.display='none'; },3400);
+}
+
+/* ---------------------------------------------------------
+   COMPONENTES COMPARTIDOS
+   --------------------------------------------------------- */
+function badge(estado){
+  const map = {
+    'Pendiente':'badge-pendiente', 'Validado':'badge-validado',
+    'Ajustado':'badge-ajustado', 'Rechazado':'badge-rechazado',
+    'Sin iniciar':'badge-neutral',
+  };
+  const cls = map[estado] || 'badge-neutral';
+  return '<span class="badge '+cls+'"><span class="badge-dot"></span>'+escapeHtml(estado)+'</span>';
+}
+
+function estadoMuro(m){
+  if(m.avanceValidado<=0) return 'Sin iniciar';
+  if(m.avanceValidado>=100) return 'Validado';
+  return 'En proceso';
+}
+
+function progressBar(pct, opts){
+  opts = opts||{};
+  const cls = opts.cls||'';
+  const markPrev = opts.markPrev;
+  let mark = '';
+  if(markPrev!==undefined && markPrev!==null){
+    mark = '<span class="progress-mark-prev" style="left:'+clamp(markPrev,0,100)+'%"></span>';
+  }
+  return '<div class="progress-track">'+
+    '<div class="progress-fill '+cls+'" style="width:'+clamp(pct,0,100)+'%"></div>'+mark+
+    '</div>';
+}
+
+function kpiCard(eyebrow, value, unit, foot, footCls){
+  return '<div class="card kpi-card">'+
+    '<div class="kpi-eyebrow">'+eyebrow+'</div>'+
+    '<div class="kpi-value">'+value+(unit?'<span class="unit">'+unit+'</span>':'')+'</div>'+
+    (foot? '<div class="kpi-foot '+(footCls||'')+'">'+foot+'</div>' : '')+
+    '</div>';
+}
+
+function emptyState(title, sub, iconName){
+  return '<div class="empty-state">'+icon(iconName||'info')+'<div class="es-title">'+title+'</div><div>'+(sub||'')+'</div></div>';
+}
+
+/* ---- gráficos SVG minimalistas (sin librerías) ---- */
+function svgBarChart(opts){
+  const labels=opts.labels, values=opts.values, colors=opts.colors||[], unit=opts.unit||'';
+  const W=560,H=220, padL=6, padR=6, padB=30, padT=18;
+  const chartW=W-padL-padR, chartH=H-padT-padB;
+  const max = Math.max(1, ...values) * 1.15;
+  const bw = chartW/values.length;
+  let bars='', labs='';
+  values.forEach(function(v,i){
+    const bh = chartH*(v/max);
+    const x = padL + i*bw + bw*0.2;
+    const bwi = bw*0.6;
+    const y = padT + (chartH-bh);
+    const color = colors[i] || 'var(--confidence-600)';
+    bars += '<rect x="'+x+'" y="'+y+'" width="'+bwi+'" height="'+bh+'" rx="2.5" fill="'+color+'"><title>'+labels[i]+': '+v+unit+'</title></rect>';
+    bars += '<text x="'+(x+bwi/2)+'" y="'+(y-6)+'" text-anchor="middle" class="chart-val">'+ (Math.round(v*10)/10) +'</text>';
+    labs += '<text x="'+(x+bwi/2)+'" y="'+(H-10)+'" text-anchor="middle" class="chart-lab">'+escapeHtml(labels[i])+'</text>';
+  });
+  return '<svg viewBox="0 0 '+W+' '+H+'" class="chart-svg" preserveAspectRatio="xMidYMid meet">'+
+    '<line x1="'+padL+'" y1="'+(H-padB)+'" x2="'+(W-padR)+'" y2="'+(H-padB)+'" stroke="var(--line-300)" stroke-width="1"/>'+
+    bars+labs+
+    '<style>.chart-val{font-family:var(--font-mono);font-size:11px;fill:var(--ink-800);font-weight:600;}.chart-lab{font-family:var(--font-mono);font-size:10px;fill:var(--steel-500);}</style>'+
+    '</svg>';
+}
+
+function svgLineChart(opts){
+  const labels=opts.labels, values=opts.values, unit=opts.unit||'';
+  const W=560,H=220, padL=8, padR=8, padB=30, padT=18;
+  const chartW=W-padL-padR, chartH=H-padT-padB;
+  const max = Math.max(1, ...values) * 1.2;
+  const min = 0;
+  const stepX = values.length>1 ? chartW/(values.length-1) : 0;
+  function xAt(i){ return padL + i*stepX; }
+  function yAt(v){ return padT + chartH*(1-((v-min)/(max-min||1))); }
+  let path='', dots='', labs='', grid='';
+  for(let g=0; g<=3; g++){
+    const gy = padT + chartH*(g/3);
+    grid += '<line x1="'+padL+'" y1="'+gy+'" x2="'+(W-padR)+'" y2="'+gy+'" stroke="var(--line-200)" stroke-width="1"/>';
+  }
+  values.forEach(function(v,i){
+    const x=xAt(i), y=yAt(v);
+    path += (i===0?'M':'L') + x.toFixed(1) + ' ' + y.toFixed(1) + ' ';
+    dots += '<circle cx="'+x+'" cy="'+y+'" r="3.4" fill="var(--safety-500)" stroke="#fff" stroke-width="1.4"><title>'+labels[i]+': '+v+unit+'</title></circle>';
+    labs += '<text x="'+x+'" y="'+(H-10)+'" text-anchor="middle" class="chart-lab">'+escapeHtml(labels[i])+'</text>';
+  });
+  const areaPath = path + 'L '+xAt(values.length-1).toFixed(1)+' '+(H-padB)+' L '+xAt(0).toFixed(1)+' '+(H-padB)+' Z';
+  return '<svg viewBox="0 0 '+W+' '+H+'" class="chart-svg" preserveAspectRatio="xMidYMid meet">'+
+    grid+
+    '<path d="'+areaPath+'" fill="var(--safety-100)" opacity="0.7"/>'+
+    '<path d="'+path+'" fill="none" stroke="var(--safety-500)" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>'+
+    dots+labs+
+    '<style>.chart-lab{font-family:var(--font-mono);font-size:10px;fill:var(--steel-500);}</style>'+
+    '</svg>';
+}
+
+/* ---------------------------------------------------------
+   SHELL: SIDEBAR + TOPBAR
+   --------------------------------------------------------- */
+const NAV_ITEMS = [
+  {view:'dashboard', label:'Dashboard', icon:'dashboard'},
+  {view:'registrar', label:'Registrar avance', icon:'registrar'},
+  {view:'analisis-ia', label:'Análisis por IA', icon:'ia'},
+  {view:'pendientes', label:'Validaciones pendientes', icon:'pendientes'},
+  {view:'historial', label:'Historial de avances', icon:'historial'},
+  {view:'contratistas', label:'Contratistas', icon:'contratistas'},
+  {view:'elementos', label:'Elementos constructivos', icon:'elementos'},
+  {view:'reportes', label:'Reportes', icon:'reportes'},
+];
+
+const VIEW_META = {
+  'dashboard':{crumbs:'KAPPA / Panel general', title:'Dashboard'},
+  'registrar':{crumbs:'KAPPA / Registrar avance', title:'Registrar avance de mampostería'},
+  'analisis-ia':{crumbs:'KAPPA / Módulo de IA', title:'Análisis por inteligencia artificial'},
+  'pendientes':{crumbs:'KAPPA / Control de avance', title:'Validaciones pendientes'},
+  'historial':{crumbs:'KAPPA / Control de avance', title:'Historial de avances'},
+  'contratistas':{crumbs:'KAPPA / Terceros', title:'Contratistas'},
+  'elementos':{crumbs:'KAPPA / Catálogo', title:'Elementos constructivos'},
+  'reportes':{crumbs:'KAPPA / Analítica', title:'Reportes y consolidación'},
+  'muro-detalle':{crumbs:'KAPPA / Elementos constructivos', title:'Ficha del elemento'},
+};
+
+function pendientesCount(){ return REGISTROS.filter(function(r){return r.estado==='Pendiente';}).length; }
+
+function renderSidebar(){
+  const items = NAV_ITEMS.map(function(it,i){
+    const active = (STATE.view===it.view) ? ' active' : '';
+    const count = it.view==='pendientes' ? pendientesCount() : null;
+    return '<button class="nav-item'+active+'" data-action="nav" data-view="'+it.view+'">'+
+      icon(it.icon)+'<span style="flex:1">'+it.label+'</span>'+
+      (count? '<span class="tag-chip" style="padding:1px 7px;font-size:10px;background:'+(active?'rgba(26,13,2,0.15)':'var(--concrete-100)')+'">'+count+'</span>' : '')+
+      '</button>';
+  }).join('');
+  return '<aside class="sidebar'+(STATE.sidebarOpen?' open':'')+'">'+
+    '<div class="sidebar-brand">'+
+      '<div class="brand-mark">K</div>'+
+      '<div class="brand-text"><span class="name">KAPPA</span><span class="sub">AVANCE INTELIGENTE</span></div>'+
+    '</div>'+
+    '<div class="sidebar-project">'+
+      '<div class="label">Proyecto activo</div>'+
+      '<div class="value">'+PROYECTO.nombre+'</div>'+
+    '</div>'+
+    '<nav class="sidebar-nav">'+items+'</nav>'+
+    '<div class="sidebar-foot">'+
+      '<b>La IA estima. El ingeniero valida.</b><br>El sistema registra.<br>'+
+      '<button class="btn-ghost btn" data-action="logout" style="margin-top:10px;padding:4px 8px;font-size:11px;color:var(--steel-300);">Cerrar sesión</button>'+
+    '</div>'+
+  '</aside>';
+}
+
+function renderTopbar(){
+  const meta = VIEW_META[STATE.view] || VIEW_META['dashboard'];
+  return '<header class="topbar">'+
+    '<div style="display:flex;align-items:center;gap:12px;">'+
+      '<button class="btn-ghost btn sidebar-toggle-btn" id="sidebarToggle" data-action="toggle-sidebar"><span class="icn">'+ICN.menu+'</span></button>'+
+      '<div>'+
+        '<div class="topbar-crumbs">'+meta.crumbs+'</div>'+
+        '<div class="topbar-title">'+meta.title+'</div>'+
+      '</div>'+
+    '</div>'+
+    '<div class="topbar-right">'+
+      '<button class="btn btn-primary btn-sm" data-action="nav" data-view="registrar">'+icon('registrar')+' Nuevo registro</button>'+
+      '<div class="user-chip"><div class="user-avatar">CR</div><div><div class="who">Camila Rojas</div><div class="role">Ing. Residente</div></div></div>'+
+    '</div>'+
+  '</header>';
+}
+
+function renderToast(){
+  if(!STATE.toast) return '';
+  return '<div class="toast '+STATE.toast.type+'">'+icon(STATE.toast.type==='success'?'check':'alert')+'<span>'+STATE.toast.msg+'</span></div>';
+}
+
+/* ---------------------------------------------------------
+   ROUTER PRINCIPAL
+   --------------------------------------------------------- */
+function renderMain(){
+  switch(STATE.view){
+    case 'dashboard': return renderDashboard();
+    case 'registrar': return renderRegistrarFlow();
+    case 'analisis-ia': return renderAnalisisIA();
+    case 'pendientes': return renderPendientes();
+    case 'historial': return renderHistorial();
+    case 'contratistas': return renderContratistas();
+    case 'elementos': return renderElementos();
+    case 'reportes': return renderReportes();
+    case 'muro-detalle': return renderDetalleMuro();
+    default: return renderDashboard();
+  }
+}
+
+function render(){
+  const app = document.getElementById('app');
+  if(!STATE.auth.loggedIn){
+    app.innerHTML = renderLogin();
+    return;
+  }
+  app.innerHTML = renderSidebar() +
+    '<div class="sidebar-backdrop'+(STATE.sidebarOpen?' open':'')+'" data-action="toggle-sidebar"></div>' +
+    '<div class="main-col">' + renderTopbar() +
+    '<main class="view">'+renderMain()+'</main></div>' + renderToast();
+  afterRender();
+}
+
+/* ---------------------------------------------------------
+   LOGIN (protege el acceso a la app y al análisis con IA)
+   --------------------------------------------------------- */
+function renderLogin(){
+  return '<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--concrete-100);padding:20px;">'+
+    '<div class="card card-pad" style="width:100%;max-width:360px;">'+
+      '<div style="display:flex;align-items:center;gap:10px;margin-bottom:18px;">'+
+        '<div class="brand-mark" style="border-color:var(--safety-500);">K</div>'+
+        '<div><div style="font-family:var(--font-display);font-weight:700;font-size:15.5px;">KAPPA</div>'+
+        '<div class="mono" style="font-size:10.5px;color:var(--steel-500);">AVANCE INTELIGENTE</div></div>'+
+      '</div>'+
+      '<div class="field"><label>Contraseña de acceso</label>'+
+        '<input type="password" id="loginPassword" placeholder="Ingresa la contraseña" '+(STATE.auth.checking?'disabled':'')+' '+
+        'onkeydown="if(event.key===\'Enter\') document.querySelector(\'[data-action=login-submit]\').click();"></div>'+
+      (STATE.auth.error ? '<p style="color:var(--alert-600);font-size:12.5px;margin:8px 0 0;">'+escapeHtml(STATE.auth.error)+'</p>' : '')+
+      '<button class="btn btn-primary" style="width:100%;margin-top:14px;" data-action="login-submit" '+(STATE.auth.checking?'disabled':'')+'>'+
+        (STATE.auth.checking?'Verificando…':'Ingresar')+'</button>'+
+    '</div>'+
+  '</div>';
+}
+
+async function doLogin(){
+  const input = document.getElementById('loginPassword');
+  const pw = input ? input.value : '';
+  if(!pw){ STATE.auth.error = 'Ingresa una contraseña.'; render(); return; }
+  STATE.auth.checking = true; STATE.auth.error = null; render();
+  try{
+    const resp = await fetch('/login', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ password: pw }),
+    });
+    const data = await resp.json().catch(function(){ return {}; });
+    if(resp.ok && data.ok){
+      sessionStorage.setItem('kappa_pw', pw);
+      STATE.auth = { loggedIn:true, password:pw, checking:false, error:null };
+      render();
+    } else {
+      STATE.auth = { loggedIn:false, password:'', checking:false, error:'Contraseña incorrecta.' };
+      render();
+    }
+  }catch(e){
+    STATE.auth = { loggedIn:false, password:'', checking:false, error:'No se pudo verificar la contraseña. Intenta de nuevo.' };
+    render();
+  }
+}
+
+function logout(){
+  sessionStorage.removeItem('kappa_pw');
+  STATE.auth = { loggedIn:false, password:'', checking:false, error:null };
+  render();
+}
+
+/* Hook para acciones que deben ejecutarse tras insertar el DOM
+   (foco, timers de la animación de análisis, etc.) */
+function afterRender(){
+  if(STATE.view==='registrar' && STATE.flow.step==='analizando'){
+    runRealAnalysis();
+  }
+}
+
+/* ---------------------------------------------------------
+   CÁLCULOS AGREGADOS (reutilizados en Dashboard y Reportes)
+   --------------------------------------------------------- */
+function totalAreaPlanificada(){ return MUROS.reduce(function(s,m){return s+m.areaTotal;},0); }
+function totalAreaValidada(){ return MUROS.reduce(function(s,m){return s+m.areaValidada;},0); }
+function avanceGlobalPct(){ const t=totalAreaPlanificada(); return t>0 ? (totalAreaValidada()/t*100) : 0; }
+function contratistasActivos(){ return CONTRATISTAS.filter(function(c){ return MUROS.some(function(m){return m.contratistaId===c.id;}); }); }
+
+function avancePorZona(){
+  const zonas = Array.from(new Set(MUROS.map(function(m){return m.zona;})));
+  return zonas.map(function(z){
+    const muros = MUROS.filter(function(m){return m.zona===z;});
+    const total = muros.reduce(function(s,m){return s+m.areaTotal;},0);
+    const val = muros.reduce(function(s,m){return s+m.areaValidada;},0);
+    return {zona:z, pct: total>0? (val/total*100):0, total:total, val:val};
+  });
+}
+
+function validadoPorContratista(){
+  return CONTRATISTAS.map(function(c){
+    const muros = MUROS.filter(function(m){return m.contratistaId===c.id;});
+    const val = muros.reduce(function(s,m){return s+m.areaValidada;},0);
+    const total = muros.reduce(function(s,m){return s+m.areaTotal;},0);
+    return {contratista:c, val:val, total:total, pendientes: REGISTROS.filter(function(r){return r.contratistaId===c.id && r.estado==='Pendiente';}).length};
+  });
+}
+
+function evolucionAcumuladaMensual(){
+  const resueltos = REGISTROS.filter(function(r){ return r.estado==='Validado'||r.estado==='Ajustado'; }).slice().sort(function(a,b){return a.fecha-b.fecha;});
+  const buckets = {};
+  const order = [];
+  resueltos.forEach(function(r){
+    const key = r.fecha.getFullYear()+'-'+String(r.fecha.getMonth()+1).padStart(2,'0');
+    if(!(key in buckets)){ buckets[key]=0; order.push(key); }
+    buckets[key]+= r.cantidadValidada;
+  });
+  let acc=0;
+  const labels=[], values=[];
+  order.forEach(function(key){
+    acc += buckets[key];
+    const parts = key.split('-');
+    labels.push(MESES[parseInt(parts[1],10)-1]+' '+parts[0].slice(2));
+    values.push(Math.round(acc*10)/10);
+  });
+  if(labels.length===0){ labels.push('—'); values.push(0); }
+  return {labels:labels, values:values};
+}
+
+function diferenciaIAvsValidacion(){
+  const resueltos = REGISTROS.filter(function(r){ return r.estado==='Validado'||r.estado==='Ajustado'; });
+  if(resueltos.length===0) return {promedio:0, promedioPct:0, n:0};
+  let sum=0, sumPct=0;
+  resueltos.forEach(function(r){
+    const diff = Math.abs(r.nuevaCantidadEstimada - r.cantidadValidada);
+    sum += diff;
+    sumPct += r.nuevaCantidadEstimada>0 ? (diff/Math.abs(r.nuevaCantidadEstimada)*100) : 0;
+  });
+  return {promedio: sum/resueltos.length, promedioPct: sumPct/resueltos.length, n:resueltos.length};
+}
+
+function tiempoPromedioValidacion(){
+  const withTime = REGISTROS.filter(function(r){ return r.tiempoValidacionMin!==null && r.tiempoValidacionMin!==undefined; });
+  if(withTime.length===0) return 0;
+  return withTime.reduce(function(s,r){return s+r.tiempoValidacionMin;},0)/withTime.length;
+}
+
+function distribucionEstados(){
+  const resueltos = REGISTROS.filter(function(r){ return r.estado!=='Pendiente'; });
+  const n = resueltos.length || 1;
+  const validado = resueltos.filter(function(r){return r.estado==='Validado';}).length;
+  const ajustado = resueltos.filter(function(r){return r.estado==='Ajustado';}).length;
+  const rechazado = resueltos.filter(function(r){return r.estado==='Rechazado';}).length;
+  return {
+    validadoPct: validado/n*100, ajustadoPct: ajustado/n*100, rechazadoPct: rechazado/n*100,
+    validado:validado, ajustado:ajustado, rechazado:rechazado, total:resueltos.length,
+  };
+}
+
+/* ---------------------------------------------------------
+   PANTALLA: DASHBOARD
+   --------------------------------------------------------- */
+function renderDashboard(){
+  const globalPct = avanceGlobalPct();
+  const totalPlan = totalAreaPlanificada();
+  const totalVal = totalAreaValidada();
+  const pend = pendientesCount();
+  const activos = contratistasActivos().length;
+
+  const kpis = '<div class="grid grid-4">'+
+    kpiCard('Avance general de mampostería', fmtPct(globalPct), '%', progressBar(globalPct)) +
+    kpiCard('Metros cuadrados planificados', fmtArea(totalPlan), 'm²', totalAreaValidada().toFixed(0)+' m² ya validados','') +
+    kpiCard('Metros cuadrados validados', fmtArea(totalVal), 'm²', fmtPct((totalVal/totalPlan)*100)+'% del total planificado') +
+    kpiCard('Avances pendientes de validación', pend, '', pend>0? 'Requieren revisión del residente':'Sin pendientes', pend>0?'warn':'up') +
+    '</div>';
+
+  const zonas = avancePorZona();
+  const porContratista = validadoPorContratista();
+  const evol = evolucionAcumuladaMensual();
+
+  const chart1 = '<div class="card card-pad">'+
+    '<div class="card-head"><span class="card-title">Avance físico por zona</span></div>'+
+    svgBarChart({labels:zonas.map(function(z){return z.zona;}), values:zonas.map(function(z){return Math.round(z.pct*10)/10;}), unit:'%', colors:zonas.map(function(){return 'var(--confidence-600)';})})+
+    '<div class="chart-legend">'+zonas.map(function(z){return '<div class="lg-item"><span class="lg-swatch" style="background:var(--confidence-600)"></span>'+z.zona+': '+fmtPct(z.pct)+'% ('+fmtArea(z.val)+' / '+fmtArea(z.total)+' m²)</div>';}).join('')+'</div>'+
+    '</div>';
+
+  const chart2 = '<div class="card card-pad">'+
+    '<div class="card-head"><span class="card-title">Avance acumulado en el tiempo</span></div>'+
+    svgLineChart({labels:evol.labels, values:evol.values, unit:' m²'})+
+    '<div class="chart-legend"><div class="lg-item"><span class="lg-swatch" style="background:var(--safety-500)"></span>m² validados acumulados</div></div>'+
+    '</div>';
+
+  const chart3 = '<div class="card card-pad">'+
+    '<div class="card-head"><span class="card-title">Cantidad validada por contratista</span></div>'+
+    svgBarChart({labels:porContratista.map(function(c){return c.contratista.nombre.split(' ')[0];}), values:porContratista.map(function(c){return Math.round(c.val*10)/10;}), unit:' m²', colors:porContratista.map(function(){return 'var(--safety-500)';})})+
+    '<div class="chart-legend">'+porContratista.map(function(c){return '<div class="lg-item"><span class="lg-swatch" style="background:var(--safety-500)"></span>'+c.contratista.nombre+': '+fmtArea(c.val)+' m²</div>';}).join('')+'</div>'+
+    '</div>';
+
+  const ultimos = REGISTROS.slice(0,7);
+  const tabla = '<div class="card card-pad">'+
+    '<div class="card-head"><span class="card-title">Últimos análisis</span><button class="btn btn-ghost btn-sm" data-action="nav" data-view="analisis-ia">Ver todos '+icon('chevron')+'</button></div>'+
+    '<div class="table-wrap"><table><thead><tr><th>Fecha</th><th>Muro</th><th>Ubicación</th><th>Contratista</th><th class="num">Avance IA</th><th>Estado</th><th></th></tr></thead><tbody>'+
+    ultimos.map(function(r){
+      const m = getMuro(r.muroCodigo);
+      return '<tr class="row-link" data-action="open-registro" data-id="'+r.id+'">'+
+        '<td class="mono cell-muted">'+fmtFechaCorta(r.fecha)+'</td>'+
+        '<td class="cell-code">'+r.muroCodigo+'</td>'+
+        '<td class="cell-muted">'+(m?m.ubicacion:'—')+'</td>'+
+        '<td>'+contratistaNombre(r.contratistaId)+'</td>'+
+        '<td class="num mono">'+fmtPct(r.avanceDetectado)+' %</td>'+
+        '<td>'+badge(r.estado)+'</td>'+
+        '<td class="cell-muted">'+icon('chevron')+'</td>'+
+        '</tr>';
+    }).join('')+
+    '</tbody></table></div>'+
+    '</div>';
+
+  return '<div style="display:flex;flex-direction:column;gap:18px;">'+
+    kpis+
+    '<div class="grid grid-3">'+chart1+chart3+'<div class="card card-pad"><div class="card-head"><span class="card-title">Contratistas activos</span></div>'+
+      porContratista.map(function(c){
+        return '<div style="padding:10px 0;border-bottom:1px solid var(--line-200)"><div style="display:flex;justify-content:space-between;margin-bottom:6px;"><span style="font-weight:600;font-size:12.5px;">'+c.contratista.nombre+'</span><span class="mono cell-muted" style="font-size:11.5px;">'+fmtPct((c.val/(c.total||1))*100)+'%</span></div>'+progressBar((c.val/(c.total||1))*100,{cls:'validate'})+'</div>';
+      }).join('')+
+      '<div style="margin-top:10px;font-size:11.5px;color:var(--steel-500);">'+activos+' contratistas con actividad de mampostería registrada.</div>'+
+      '</div>'+
+    '</div>'+
+    chart2+
+    tabla+
+    '</div>';
+}
+
+/* ---------------------------------------------------------
+   UTILIDAD DETERMINISTA (usada para variar tonos de ladrillo en las
+   imágenes de referencia y el patrón de la máscara ilustrativa —
+   ya NO se usa para inventar porcentajes de avance: esos ahora
+   vienen siempre del servicio real de IA)
+   --------------------------------------------------------- */
+function hashStr(s){
+  let h=0;
+  for(let i=0;i<s.length;i++){ h = (h*31 + s.charCodeAt(i)) >>> 0; }
+  return h;
+}
+
+function recomputeMuroAggregates(muro){
+  let acumulado = 0;
+  muro.historial.forEach(function(r){
+    if(r.estado==='Validado' || r.estado==='Ajustado') acumulado += (r.cantidadValidada||0);
+  });
+  muro.areaValidada = Math.round(clamp(acumulado,0,muro.areaTotal)*10)/10;
+  muro.avanceValidado = muro.areaTotal>0 ? Math.round((muro.areaValidada/muro.areaTotal)*1000)/10 : 0;
+}
+
+/* ---------------------------------------------------------
+   PANTALLA: REGISTRAR AVANCE (asistente de 4 pasos)
+   --------------------------------------------------------- */
+const FLOW_STEPS = [
+  {key:'seleccion', label:'Selección'},
+  {key:'evidencia', label:'Evidencia'},
+  {key:'analizando', label:'Análisis IA'},
+  {key:'resultado', label:'Validación'},
+];
+
+function renderStepper(currentKey){
+  const idx = FLOW_STEPS.findIndex(function(s){return s.key===currentKey;});
+  return '<div class="stepper">'+FLOW_STEPS.map(function(s,i){
+    const cls = i<idx ? 'done' : (i===idx ? 'current' : '');
+    return '<div class="step-item '+cls+'">'+
+      '<div class="step-dot">'+(i<idx? icon('check') : (i+1))+'</div>'+
+      '<div class="step-label">'+s.label+'</div>'+
+      '</div>' + (i<FLOW_STEPS.length-1? '<div class="step-rule"></div>' : '');
+  }).join('')+'</div>';
+}
+
+function renderRegistrarFlow(){
+  const step = STATE.flow.step;
+  let body;
+  if(step==='seleccion') body = renderFlowSeleccion();
+  else if(step==='evidencia') body = renderFlowEvidencia();
+  else if(step==='analizando') body = renderFlowAnalizando();
+  else body = renderFlowResultado();
+  return '<div style="max-width:920px;">'+renderStepper(step)+body+'</div>';
+}
+
+function renderFlowSeleccion(){
+  const modo = STATE.flow.modo || 'existente';
+  const toggle = '<div class="pill-toggle" style="margin-bottom:18px;">'+
+      '<button data-action="flow-mode" data-mode="existente" class="'+(modo==='existente'?'active':'')+'">Elemento existente</button>'+
+      '<button data-action="flow-mode" data-mode="nuevo" class="'+(modo==='nuevo'?'active':'')+'">+ Registrar nuevo elemento</button>'+
+    '</div>';
+  return toggle + (modo==='nuevo' ? renderFlowNuevoElemento() : renderFlowExistente());
+}
+
+function renderFlowExistente(){
+  const zonas = Array.from(new Set(MUROS.map(function(m){return m.zona;})));
+  const zona = STATE.flow.zona;
+  const pisos = zona ? Array.from(new Set(MUROS.filter(function(m){return m.zona===zona;}).map(function(m){return m.piso;}))) : [];
+  const piso = STATE.flow.piso;
+  const elementos = (zona&&piso) ? MUROS.filter(function(m){return m.zona===zona && m.piso===piso;}) : [];
+  const muro = STATE.flow.muroCodigo ? getMuro(STATE.flow.muroCodigo) : null;
+
+  const puedeContinuar = muro && muro.avanceValidado < 100;
+
+  return '<div class="card card-pad">'+
+    '<span class="card-eyebrow">Paso 1 de 4 · Modo A</span>'+
+    '<h3 style="margin-bottom:4px;">Seleccionar elemento constructivo</h3>'+
+    '<p style="color:var(--steel-500);font-size:12.5px;margin-bottom:20px;">Elige el proyecto, la zona y el muro sobre el que se registrará el avance de mampostería. Se conserva su historial.</p>'+
+    '<div class="grid grid-3">'+
+      '<div class="field"><label>Proyecto</label><select disabled><option>'+(muro?escapeHtml(muro.proyecto):PROYECTO.nombre)+'</option></select></div>'+
+      '<div class="field"><label>Zona</label><select data-action="flow-field" data-field="zona"><option value="">Seleccionar…</option>'+
+        zonas.map(function(z){return '<option value="'+z+'" '+(z===zona?'selected':'')+'>'+z+'</option>';}).join('')+
+      '</select></div>'+
+      '<div class="field"><label>Piso</label><select data-action="flow-field" data-field="piso" '+(zona?'':'disabled')+'><option value="">Seleccionar…</option>'+
+        pisos.map(function(p){return '<option value="'+p+'" '+(p===piso?'selected':'')+'>'+p+'</option>';}).join('')+
+      '</select></div>'+
+    '</div>'+
+    '<div class="grid grid-3">'+
+      '<div class="field"><label>Elemento (muro)</label><select data-action="flow-field" data-field="muroCodigo" '+(piso?'':'disabled')+'><option value="">Seleccionar…</option>'+
+        elementos.map(function(m){return '<option value="'+m.codigo+'" '+(m.codigo===STATE.flow.muroCodigo?'selected':'')+'>'+m.codigo+' — '+m.unidad+'</option>';}).join('')+
+      '</select></div>'+
+      '<div class="field"><label>Actividad</label><select disabled><option>Mampostería</option></select></div>'+
+      '<div class="field"><label>Contratista</label><select disabled><option>'+(muro? contratistaNombre(muro.contratistaId) : '—')+'</option></select></div>'+
+    '</div>'+
+    (muro? renderMuroSummary(muro) : '')+
+    (muro && !puedeContinuar ? '<div class="notice-banner" style="margin-top:14px;">'+icon('info')+'<span>Este elemento ya se encuentra validado al 100&nbsp;%. Selecciona otro muro para registrar un nuevo avance.</span></div>' : '')+
+    '<div style="display:flex;justify-content:flex-end;margin-top:18px;">'+
+      '<button class="btn btn-primary" data-action="flow-goto" data-step="evidencia" '+(puedeContinuar?'':'disabled')+'>Continuar al análisis '+icon('chevron')+'</button>'+
+    '</div>'+
+  '</div>';
+}
+
+function optionsWithOtro(existentes){
+  return existentes.map(function(v){return '<option value="'+escapeHtml(v)+'">'+escapeHtml(v)+'</option>';}).join('')+
+    '<option value="__otro__">+ Escribir nuevo…</option>';
+}
+
+/* El formulario de "nuevo elemento" se renderiza una sola vez al entrar en
+   Modo B y a partir de ahí es DOM puro: nada dentro de él dispara un
+   render() completo de la app mientras se escribe (eso podría robarle el
+   foco a un campo justo cuando el usuario hace clic en el siguiente).
+   Los campos "+ Escribir nuevo…" se muestran u ocultan con JS directo,
+   y todos los valores se leen del DOM recién al presionar "Guardar". */
+function renderFlowNuevoElemento(){
+  const zonasExistentes = Array.from(new Set(MUROS.map(function(m){return m.zona;})));
+  const pisosExistentes = Array.from(new Set(MUROS.map(function(m){return m.piso;})));
+
+  return '<div class="card card-pad">'+
+    '<span class="card-eyebrow">Paso 1 de 4 · Modo B</span>'+
+    '<h3 style="margin-bottom:4px;">Registrar nuevo elemento constructivo</h3>'+
+    '<p style="color:var(--steel-500);font-size:12.5px;margin-bottom:20px;">Usa esta opción cuando el muro todavía no existe en el catálogo. Quedará disponible para futuros registros en cuanto lo guardes.</p>'+
+
+    '<div class="grid grid-3">'+
+      '<div class="field"><label>Proyecto</label>'+
+        '<select id="neProyecto" onchange="toggleOtro(this,\'neProyectoNuevoWrap\')">'+optionsWithOtro(PROYECTOS)+'</select>'+
+        '<div id="neProyectoNuevoWrap" style="display:none;margin-top:6px;"><input type="text" id="neProyectoNuevo" placeholder="Nombre del nuevo proyecto"></div>'+
+      '</div>'+
+      '<div class="field"><label>Zona / Torre</label>'+
+        '<select id="neZona" onchange="toggleOtro(this,\'neZonaNuevaWrap\')"><option value="">Seleccionar…</option>'+optionsWithOtro(zonasExistentes)+'</select>'+
+        '<div id="neZonaNuevaWrap" style="display:none;margin-top:6px;"><input type="text" id="neZonaNueva" placeholder="Nombre de la nueva zona/torre"></div>'+
+      '</div>'+
+      '<div class="field"><label>Piso</label>'+
+        '<select id="nePiso" onchange="toggleOtro(this,\'nePisoNuevoWrap\')"><option value="">Seleccionar…</option>'+optionsWithOtro(pisosExistentes)+'</select>'+
+        '<div id="nePisoNuevoWrap" style="display:none;margin-top:6px;"><input type="text" id="nePisoNueva" placeholder="Nombre del nuevo piso"></div>'+
+      '</div>'+
+    '</div>'+
+
+    '<div class="grid grid-3">'+
+      '<div class="field"><label>Código del elemento</label><input type="text" id="neCodigo" placeholder="Ej: M-020"></div>'+
+      '<div class="field"><label>Actividad</label><select disabled><option>Mampostería</option></select></div>'+
+      '<div class="field"><label>Contratista</label>'+
+        '<select id="neContratista" onchange="toggleOtro(this,\'neContratistaNuevoWrap\')">'+
+          CONTRATISTAS.map(function(c){return '<option value="'+c.id+'">'+escapeHtml(c.nombre)+'</option>';}).join('')+
+          '<option value="__otro__">+ Registrar nuevo contratista…</option>'+
+        '</select>'+
+        '<div id="neContratistaNuevoWrap" style="display:none;margin-top:6px;"><input type="text" id="neContratistaNuevo" placeholder="Nombre del nuevo contratista"></div>'+
+      '</div>'+
+    '</div>'+
+
+    '<div class="field"><label>Descripción (opcional)</label><input type="text" id="neNotas" placeholder="Ej: muro divisorio cocina–sala"></div>'+
+
+    '<div class="grid grid-3">'+
+      '<div class="field"><label>Largo (m)</label><input type="number" id="neLargo" min="0" step="0.1" placeholder="0.0" oninput="updateNuevoElementoArea()"></div>'+
+      '<div class="field"><label>Alto (m)</label><input type="number" id="neAlto" min="0" step="0.1" placeholder="0.0" oninput="updateNuevoElementoArea()"></div>'+
+      '<div class="field"><label>Área total (calculada)</label><input type="text" id="neAreaCalc" disabled value="—"></div>'+
+    '</div>'+
+    '<div class="readout-sub" style="margin-top:-8px;margin-bottom:14px;">Área total = largo × alto. Se calcula automáticamente.</div>'+
+
+    '<div style="display:flex;justify-content:flex-end;">'+
+      '<button class="btn btn-primary" data-action="guardar-nuevo-elemento">'+icon('registrar')+' Guardar elemento y continuar</button>'+
+    '</div>'+
+  '</div>';
+}
+
+function toggleOtro(selectEl, wrapId){
+  const wrap = document.getElementById(wrapId);
+  if(wrap) wrap.style.display = (selectEl.value==='__otro__') ? 'block' : 'none';
+}
+
+function updateNuevoElementoArea(){
+  const l = parseFloat(document.getElementById('neLargo').value)||0;
+  const a = parseFloat(document.getElementById('neAlto').value)||0;
+  const out = document.getElementById('neAreaCalc');
+  if(out) out.value = (l>0 && a>0) ? fmtArea(Math.round(l*a*10)/10)+' m²' : '—';
+}
+
+function guardarNuevoElemento(){
+  function val(id){ const el=document.getElementById(id); return el ? el.value : ''; }
+
+  const proyectoSel = val('neProyecto');
+  const proyecto = proyectoSel==='__otro__' ? val('neProyectoNuevo').trim() : proyectoSel;
+  const zonaSel = val('neZona');
+  const zona = zonaSel==='__otro__' ? val('neZonaNueva').trim() : zonaSel;
+  const pisoSel = val('nePiso');
+  const piso = pisoSel==='__otro__' ? val('nePisoNueva').trim() : pisoSel;
+  const codigo = val('neCodigo').trim().toUpperCase();
+  const notas = val('neNotas').trim();
+  const largo = parseFloat(val('neLargo'));
+  const alto = parseFloat(val('neAlto'));
+  const contratistaSel = val('neContratista');
+  let contratistaId = contratistaSel==='__otro__' ? '' : contratistaSel;
+  const contratistaNuevoNombre = contratistaSel==='__otro__' ? val('neContratistaNuevo').trim() : '';
+
+  if(!proyecto){ showToast('error','Indica el proyecto.'); return; }
+  if(!zona){ showToast('error','Indica la zona o torre.'); return; }
+  if(!piso){ showToast('error','Indica el piso.'); return; }
+  if(!codigo){ showToast('error','Indica el código del elemento.'); return; }
+  if(getMuro(codigo)){ showToast('error','Ya existe un elemento con el código "'+codigo+'". Usa un código distinto.'); return; }
+  if(contratistaSel==='__otro__' && !contratistaNuevoNombre){ showToast('error','Indica el nombre del nuevo contratista.'); return; }
+  if(!largo || largo<=0){ showToast('error','Indica un largo válido, mayor a 0.'); return; }
+  if(!alto || alto<=0){ showToast('error','Indica un alto válido, mayor a 0.'); return; }
+
+  if(proyecto && PROYECTOS.indexOf(proyecto)===-1) PROYECTOS.push(proyecto);
+
+  if(contratistaSel==='__otro__'){
+    contratistaId = uid('CT');
+    CONTRATISTAS.push({ id:contratistaId, nombre:contratistaNuevoNombre, actividad:'Mampostería', contacto:'Contratista registrado manualmente desde la app.' });
+  }
+
+  const areaTotal = Math.round(largo*alto*10)/10;
+  const muro = {
+    codigo:codigo, proyecto:proyecto, zona:zona, piso:piso, unidad:notas || codigo,
+    ubicacion:zona+' – '+piso+(notas? ' – '+notas : ''), notas:notas,
+    actividad:'Mampostería', contratistaId:contratistaId,
+    largo:largo, alto:alto, areaTotal:areaTotal,
+    avanceValidado:0, areaValidada:0, historial:[],
+  };
+  MUROS.push(muro);
+
+  STATE.flow.modo = 'existente';
+  STATE.flow.zona = zona; STATE.flow.piso = piso; STATE.flow.muroCodigo = codigo;
+  STATE.flow.step = 'evidencia';
+  showToast('success','Elemento '+codigo+' registrado. Ya está disponible en el catálogo.');
+}
+
+function renderMuroSummary(muro){
+  return '<div class="card" style="background:var(--concrete-50);padding:16px 18px;margin-top:6px;">'+
+    '<div class="readonly-grid">'+
+      '<div class="readonly-item"><div class="rl-label">Largo</div><div class="rl-value small">'+muro.largo+' m</div></div>'+
+      '<div class="readonly-item"><div class="rl-label">Alto</div><div class="rl-value small">'+muro.alto+' m</div></div>'+
+      '<div class="readonly-item"><div class="rl-label">Área total</div><div class="rl-value">'+fmtArea(muro.areaTotal)+' <span style="font-size:12px;color:var(--steel-500);">m²</span></div></div>'+
+      '<div class="readonly-item"><div class="rl-label">Estado actual</div><div class="rl-value">'+fmtPct(muro.avanceValidado)+'<span style="font-size:12px;color:var(--steel-500);">%</span></div></div>'+
+    '</div>'+
+    '<div style="margin-top:12px;">'+progressBar(muro.avanceValidado,{cls:'validate'})+'</div>'+
+    '<div style="margin-top:8px;font-size:11.5px;color:var(--steel-500);">Área previamente validada: <b class="mono" style="color:var(--ink-800);">'+fmtArea(muro.areaValidada)+' m²</b> de '+fmtArea(muro.areaTotal)+' m² · Ubicación: '+muro.ubicacion+'</div>'+
+  '</div>';
+}
+
+function renderFlowEvidencia(){
+  const muro = getMuro(STATE.flow.muroCodigo);
+  if(!muro) return renderFlowSeleccion();
+  const hasImg = !!STATE.flow.imagen;
+  const err = STATE.flow.analysisError;
+
+  return '<div class="card card-pad">'+
+    '<span class="card-eyebrow">Paso 2 de 4</span>'+
+    '<h3 style="margin-bottom:4px;">Carga de evidencia fotográfica</h3>'+
+    '<p style="color:var(--steel-500);font-size:12.5px;margin-bottom:18px;">Captura o carga una fotografía del avance actual de mampostería del elemento <b class="mono">'+muro.codigo+'</b>. La fotografía se enviará, junto con los datos del elemento, a un servicio de IA con visión multimodal para obtener una estimación de apoyo.</p>'+
+
+    (err? '<div class="alert-banner">'+icon('alert')+'<div><div class="at">No se pudo completar el análisis</div><div class="ad">'+escapeHtml(err)+'</div></div></div>' : '')+
+
+    '<div class="readonly-grid" style="margin-bottom:18px;">'+
+      '<div class="readonly-item"><div class="rl-label">Elemento</div><div class="rl-value small">'+muro.codigo+'</div></div>'+
+      '<div class="readonly-item"><div class="rl-label">Área total</div><div class="rl-value small">'+fmtArea(muro.areaTotal)+' m²</div></div>'+
+      '<div class="readonly-item"><div class="rl-label">Área previamente validada</div><div class="rl-value small">'+fmtArea(muro.areaValidada)+' m²</div></div>'+
+      '<div class="readonly-item"><div class="rl-label">Fecha de registro</div><div class="rl-value small">'+fmtFecha(NOW)+'</div></div>'+
+    '</div>'+
+
+    (hasImg ?
+      '<div class="evidence-preview"><img src="'+STATE.flow.imagen+'" alt="Evidencia cargada"></div>'+
+      '<div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px;">'+
+        '<span style="font-size:12px;color:var(--steel-500);">'+icon('camera')+' '+escapeHtml(STATE.flow.imagenLabel||'Evidencia cargada')+'</span>'+
+        '<button class="btn btn-ghost btn-sm" data-action="flow-clear-image">Quitar y cargar otra</button>'+
+      '</div>'
+      :
+      '<label class="upload-zone" id="uploadZone">'+
+        icon('camera','upload-icon-wrap')+
+        '<div class="upload-title">Captura o carga una fotografía del avance actual</div>'+
+        '<div class="upload-sub">Arrastra un archivo aquí o haz clic para seleccionarlo (JPG, PNG)</div>'+
+        '<input type="file" accept="image/*" id="fileInput" style="display:none" data-action="flow-file">'+
+      '</label>'+
+      '<div style="text-align:center;margin-top:12px;">'+
+        '<button class="btn btn-outline btn-sm" data-action="flow-demo-image">Usar fotografía de referencia (sin cámara disponible)</button>'+
+      '</div>'
+    )+
+
+    '<div class="notice-banner" style="margin-top:18px;margin-bottom:0;">'+icon('info')+'<span>La IA entrega una <b>estimación</b> con un nivel de confianza, no una medición exacta. El resultado siempre queda sujeto a validación humana antes de registrarse como avance oficial.</span></div>'+
+
+    '<div style="display:flex;justify-content:space-between;margin-top:22px;">'+
+      '<button class="btn btn-outline" data-action="flow-goto" data-step="seleccion">'+icon('chevron')+' Volver</button>'+
+      '<button class="btn btn-primary" data-action="flow-analizar" '+(hasImg?'':'disabled')+'>Analizar con IA</button>'+
+    '</div>'+
+  '</div>';
+}
+
+/* ---------------------------------------------------------
+   PASO 3 · ANÁLISIS POR IA (conectado a un servicio real de
+   visión multimodal — Claude, vía la API de Anthropic)
+   --------------------------------------------------------- */
+const ANALYSIS_STAGES = [
+  'Imagen recibida',
+  'Preparando evidencia…',
+  'Enviando fotografía y contexto del elemento al servicio de IA…',
+  'Interpretando el resultado…',
+  'Resultado generado',
+];
+
+function renderFlowAnalizando(){
+  const muro = getMuro(STATE.flow.muroCodigo);
+  return '<div class="console-wrap">'+
+    '<div class="console-label">'+icon('ia')+' Servicio de IA · visión multimodal — '+muro.codigo+'</div>'+
+    '<div class="console-frame">'+consoleScanSvg()+'</div>'+
+    '<div class="console-steps" id="consoleSteps">'+
+      ANALYSIS_STAGES.map(function(s,i){
+        return '<div class="console-step" data-idx="'+i+'"><span class="cs-icon">○</span><span>'+s+'</span></div>';
+      }).join('')+
+    '</div>'+
+  '</div>';
+}
+
+function consoleScanSvg(){
+  return '<svg viewBox="0 0 180 180">'+
+    '<rect x="20" y="20" width="140" height="140" rx="4" fill="none" stroke="rgba(234,240,244,0.25)" stroke-width="1.5"/>'+
+    '<g stroke="rgba(234,240,244,0.5)" stroke-width="1.6">'+
+      '<line x1="20" y1="60" x2="160" y2="60"/><line x1="20" y1="100" x2="160" y2="100"/><line x1="20" y1="140" x2="160" y2="140"/>'+
+      '<line x1="60" y1="20" x2="60" y2="160"/><line x1="100" y1="20" x2="100" y2="160"/><line x1="140" y1="20" x2="140" y2="160"/>'+
+    '</g>'+
+    '<line x1="14" y1="14" x2="34" y2="14" stroke="var(--safety-500)" stroke-width="2.4"/><line x1="14" y1="14" x2="14" y2="34" stroke="var(--safety-500)" stroke-width="2.4"/>'+
+    '<line x1="166" y1="14" x2="146" y2="14" stroke="var(--safety-500)" stroke-width="2.4"/><line x1="166" y1="14" x2="166" y2="34" stroke="var(--safety-500)" stroke-width="2.4"/>'+
+    '<line x1="14" y1="166" x2="34" y2="166" stroke="var(--safety-500)" stroke-width="2.4"/><line x1="14" y1="166" x2="14" y2="146" stroke="var(--safety-500)" stroke-width="2.4"/>'+
+    '<line x1="166" y1="166" x2="146" y2="166" stroke="var(--safety-500)" stroke-width="2.4"/><line x1="166" y1="166" x2="166" y2="146" stroke="var(--safety-500)" stroke-width="2.4"/>'+
+    '<line x1="20" y1="20" x2="160" y2="20" stroke="var(--safety-500)" stroke-width="2" id="scanline">'+
+      '<animate attributeName="y1" values="20;160;20" dur="2.6s" repeatCount="indefinite"/>'+
+      '<animate attributeName="y2" values="20;160;20" dur="2.6s" repeatCount="indefinite"/>'+
+      '<animate attributeName="opacity" values="0.9;0.5;0.9" dur="2.6s" repeatCount="indefinite"/>'+
+    '</line>'+
+  '</svg>';
+}
+
+function wait(ms){ return new Promise(function(res){ setTimeout(res, ms); }); }
+
+function setStageState(idx, state){
+  const el = document.querySelector('.console-step[data-idx="'+idx+'"]');
+  if(!el) return;
+  if(state==='active'){ el.classList.add('active'); }
+  else if(state==='complete'){
+    el.classList.remove('active'); el.classList.add('complete');
+    const ic = el.querySelector('.cs-icon'); if(ic) ic.innerHTML='✓';
+  }
+}
+
+/* Reduce cualquier imagen (foto real o SVG de referencia) a un JPEG
+   base64 de tamaño razonable antes de enviarla a la API. */
+function prepareImageForApi(dataUrl){
+  return new Promise(function(resolve, reject){
+    const img = new Image();
+    img.onload = function(){
+      try{
+        const maxDim = 1024;
+        const w = img.naturalWidth || 800, h = img.naturalHeight || 600;
+        const scale = Math.min(1, maxDim/Math.max(w,h));
+        const cw = Math.max(1, Math.round(w*scale)), ch = Math.max(1, Math.round(h*scale));
+        const canvas = document.createElement('canvas');
+        canvas.width = cw; canvas.height = ch;
+        const ctx = canvas.getContext('2d');
+        ctx.fillStyle = '#ffffff'; ctx.fillRect(0,0,cw,ch);
+        ctx.drawImage(img, 0, 0, cw, ch);
+        const outUrl = canvas.toDataURL('image/jpeg', 0.85);
+        const comma = outUrl.indexOf(',');
+        resolve({ media_type:'image/jpeg', data: outUrl.slice(comma+1) });
+      }catch(err){ reject(err); }
+    };
+    img.onerror = function(){ reject(new Error('No se pudo leer la fotografía cargada.')); };
+    img.src = dataUrl;
+  });
+}
+
+function buildAnalysisPrompt(muro){
+  return 'Analiza la imagen proporcionada como evidencia del estado actual de un elemento de mampostería.\n\n'+
+    'Contexto:\n'+
+    'Actividad: Mampostería.\n'+
+    'Código del elemento: '+muro.codigo+'.\n'+
+    'Dimensiones conocidas:\n'+
+    'Largo: '+muro.largo+' metros.\n'+
+    'Alto: '+muro.alto+' metros.\n'+
+    'Área total planificada: '+fmtArea(muro.areaTotal)+' m².\n'+
+    'Avance previamente validado: '+fmtPct(muro.avanceValidado)+' %.\n\n'+
+    'Tu objetivo es estimar visualmente qué porcentaje aproximado del elemento presenta mampostería ejecutada.\n'+
+    'Analiza únicamente la evidencia visible. No inventes información que no pueda observarse.\n'+
+    'Si la fotografía no permite evaluar correctamente el avance debido a oclusión, mala iluminación, ángulo inadecuado, '+
+    'muro parcialmente fuera de la imagen, u objetos que cubren el muro, reduce el nivel de confianza y registra la limitación.\n\n'+
+    'Devuelve EXCLUSIVAMENTE un objeto JSON válido, sin texto adicional ni bloques de código markdown, con exactamente esta forma:\n'+
+    '{\n'+
+    '  "avance_estimado_porcentaje": <número entre 0 y 100>,\n'+
+    '  "nivel_confianza": <número entre 0 y 100>,\n'+
+    '  "descripcion": "<explicación breve en español, máximo dos frases>",\n'+
+    '  "limitaciones": ["<limitación visual detectada>"],\n'+
+    '  "requiere_revision": <true o false>\n'+
+    '}\n'+
+    'El porcentaje debe estar entre 0 y 100. Si no hay limitaciones relevantes, devuelve una lista vacía.';
+}
+
+function parseAiJson(raw){
+  if(!raw) return null;
+  let cleaned = raw.trim().replace(/^```json/i,'').replace(/^```/,'').replace(/```$/,'').trim();
+  try{ return JSON.parse(cleaned); }catch(e){}
+  const match = cleaned.match(/\{[\s\S]*\}/);
+  if(match){ try{ return JSON.parse(match[0]); }catch(e){} }
+  return null;
+}
+
+function normalizeAiResult(obj){
+  const pct = clamp(parseFloat(obj.avance_estimado_porcentaje), 0, 100);
+  const conf = clamp(parseFloat(obj.nivel_confianza), 0, 100);
+  let limitaciones = obj.limitaciones;
+  if(!Array.isArray(limitaciones)) limitaciones = [];
+  limitaciones = limitaciones.filter(function(l){return typeof l==='string' && l.trim();}).slice(0,6);
+  return {
+    avance_estimado_porcentaje: isNaN(pct)?0:Math.round(pct*10)/10,
+    nivel_confianza: isNaN(conf)?50:Math.round(conf),
+    descripcion: (typeof obj.descripcion==='string' && obj.descripcion.trim()) ? obj.descripcion.trim() : 'La IA no incluyó una descripción para este resultado.',
+    limitaciones: limitaciones,
+    requiere_revision: !!obj.requiere_revision,
+  };
+}
+
+/* Ruta de tu función serverless propia (Cloudflare Pages Functions), que
+   reenvía la petición a https://api.anthropic.com/v1/messages agregando la
+   API key de forma segura desde el servidor. Al vivir en el mismo dominio
+   que este HTML, no hay que configurar nada de CORS. */
+const AI_PROXY_URL = '/analyze';
+
+async function callVisionAPI(muro, apiImage){
+  const prompt = buildAnalysisPrompt(muro);
+  let response;
+  try{
+    response = await fetch(AI_PROXY_URL, {
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json',
+        'X-App-Password': STATE.auth.password || '',
+      },
+      body: JSON.stringify({
+        model:'claude-sonnet-4-6',
+        max_tokens:700,
+        messages:[{
+          role:'user',
+          content:[
+            { type:'image', source:{ type:'base64', media_type: apiImage.media_type, data: apiImage.data } },
+            { type:'text', text: prompt },
+          ],
+        }],
+      }),
+    });
+  }catch(networkErr){
+    throw new Error('No se pudo contactar el servicio de IA. Verifica que AI_PROXY_URL esté configurada correctamente y que el proxy esté desplegado.');
+  }
+  if(!response.ok){
+    throw new Error('El servicio de IA respondió con un error (código '+response.status+'). Intenta nuevamente en unos segundos.');
+  }
+  const data = await response.json();
+  const textBlocks = (data.content||[]).filter(function(b){return b.type==='text';}).map(function(b){return b.text;});
+  const raw = textBlocks.join('\n');
+  const parsed = parseAiJson(raw);
+  if(!parsed || typeof parsed.avance_estimado_porcentaje!=='number' && isNaN(parseFloat(parsed.avance_estimado_porcentaje))){
+    throw new Error('La IA no devolvió un resultado interpretable. Intenta nuevamente.');
+  }
+  return normalizeAiResult(parsed);
+}
+
+function handleAnalysisError(msg){
+  STATE.flow.analysisRunning = false;
+  STATE.flow.analysisError = msg;
+  STATE.flow.step = 'evidencia';
+  render();
+}
+
+async function runRealAnalysis(){
+  if(STATE.flow.analysisRunning) return;
+  STATE.flow.analysisRunning = true;
+  STATE.flow.analysisError = null;
+  const muro = getMuro(STATE.flow.muroCodigo);
+
+  setStageState(0,'active');
+  await wait(280);
+  setStageState(0,'complete');
+
+  setStageState(1,'active');
+  let apiImage;
+  try{
+    apiImage = await prepareImageForApi(STATE.flow.imagen);
+  }catch(e){
+    handleAnalysisError('No se pudo procesar la imagen cargada. Intenta con otra fotografía.');
+    return;
+  }
+  await wait(200);
+  setStageState(1,'complete');
+
+  setStageState(2,'active');
+  let aiResult;
+  try{
+    aiResult = await callVisionAPI(muro, apiImage);
+  }catch(e){
+    handleAnalysisError(e && e.message ? e.message : 'No se pudo contactar el servicio de IA.');
+    return;
+  }
+  setStageState(2,'complete');
+
+  setStageState(3,'active');
+  await wait(260);
+  setStageState(3,'complete');
+
+  setStageState(4,'active');
+  await wait(220);
+  setStageState(4,'complete');
+
+  const pActual = aiResult.avance_estimado_porcentaje;
+  const pAnterior = muro.avanceValidado;
+  const areaEstimAcum = Math.round(muro.areaTotal*(pActual/100)*10)/10;
+  const inconsistente = pActual < pAnterior;
+  const nuevaCantidad = inconsistente ? 0 : Math.max(0, Math.round((areaEstimAcum-muro.areaValidada)*10)/10);
+  const clasificacion = classify(pActual, pAnterior, aiResult.requiere_revision, aiResult.nivel_confianza);
+
+  STATE.flow.analysisRunning = false;
+  STATE.flow.analysisDoneAt = Date.now();
+  STATE.flow.step = 'resultado';
+  STATE.flow.resultado = {
+    avanceAnterior: pAnterior,
+    avanceDetectado: pActual,
+    confianza: aiResult.nivel_confianza,
+    areaTotal: muro.areaTotal,
+    areaValidadaPrev: muro.areaValidada,
+    areaEstimadaAcum: areaEstimAcum,
+    nuevaCantidadEstimada: nuevaCantidad,
+    inconsistente: inconsistente,
+    descripcion: aiResult.descripcion,
+    limitaciones: aiResult.limitaciones,
+    requiereRevision: aiResult.requiere_revision,
+    clasificacion: clasificacion,
+  };
+  render();
+}
+
+/* ---------------------------------------------------------
+   PASO 4 · RESULTADO DEL ANÁLISIS + VALIDACIÓN HUMANA
+   --------------------------------------------------------- */
+function getFlowResultData(){
+  const reviewing = !!STATE.flow.reviewingRegistroId;
+  if(reviewing){
+    const reg = REGISTROS.find(function(r){return r.id===STATE.flow.reviewingRegistroId;});
+    const muro = getMuro(reg.muroCodigo);
+    return {
+      reviewing:true, reg:reg, muro:muro,
+      avanceAnterior:reg.avanceAnterior, avanceDetectado:reg.avanceDetectado, confianza:reg.confianza,
+      areaTotal:reg.areaTotal, areaValidadaPrev: Math.round(reg.areaTotal*(reg.avanceAnterior/100)*10)/10,
+      areaEstimadaAcum:reg.areaEstimadaAcum, nuevaCantidadEstimada:reg.nuevaCantidadEstimada,
+      inconsistente: reg.avanceDetectado < reg.avanceAnterior, imagen:reg.imagen,
+      descripcion: reg.descripcion||'', limitaciones: reg.limitaciones||[],
+      requiereRevision: !!reg.requiereRevision,
+      clasificacion: reg.clasificacion || classify(reg.avanceDetectado, reg.avanceAnterior, reg.requiereRevision, reg.confianza),
+    };
+  }
+  const r = STATE.flow.resultado;
+  const muro = getMuro(STATE.flow.muroCodigo);
+  return {
+    reviewing:false, reg:null, muro:muro,
+    avanceAnterior:r.avanceAnterior, avanceDetectado:r.avanceDetectado, confianza:r.confianza,
+    areaTotal:r.areaTotal, areaValidadaPrev:r.areaValidadaPrev, areaEstimadaAcum:r.areaEstimadaAcum,
+    nuevaCantidadEstimada:r.nuevaCantidadEstimada, inconsistente:r.inconsistente, imagen:STATE.flow.imagen,
+    descripcion: r.descripcion||'', limitaciones: r.limitaciones||[], requiereRevision: !!r.requiereRevision,
+    clasificacion: r.clasificacion || classify(r.avanceDetectado, r.avanceAnterior, r.requiereRevision, r.confianza),
+  };
+}
+
+function maskOverlayMarkup(pct, seed){
+  pct = clamp(pct,0,100);
+  const h = hashStr('mask'+seed);
+  const pts = [];
+  const segs = 7;
+  for(let i=0;i<=segs;i++){
+    const x = (i/segs*100).toFixed(1);
+    const jag = ((h>>(i%8)) % 10);
+    pts.push(x+'% '+jag+'%');
+  }
+  const clip = 'polygon(0% 100%, '+pts.join(', ')+', 100% 100%)';
+  return '<div class="mask-overlay" style="height:'+pct+'%;">'+
+    '<div style="position:absolute;inset:0;background:linear-gradient(180deg, rgba(37,99,166,0.05), rgba(37,99,166,0.34) 30%, rgba(37,99,166,0.4));clip-path:'+clip+';border-top:2px dashed rgba(255,255,255,0.85);"></div>'+
+  '</div>';
+}
+
+function renderFlowResultado(){
+  const d = getFlowResultData();
+  if(!d.muro) return renderFlowSeleccion();
+  const muro = d.muro;
+  const cantidadEstClamped = Math.max(0, Math.round(d.nuevaCantidadEstimada*10)/10);
+  const remaining = Math.round((d.areaTotal - d.areaValidadaPrev)*10)/10;
+  const showReject = !!STATE.flow.showReject;
+  const meta = CLASIFICACION_META[d.clasificacion] || CLASIFICACION_META.verde;
+
+  let alertBlock = '';
+  if(d.clasificacion==='rojo'){
+    alertBlock = '<div class="alert-banner">'+icon('alert')+'<div><div class="at">Posible inconsistencia</div><div class="ad">El avance estimado por IA ('+fmtPct(d.avanceDetectado)+'&nbsp;%) es inferior al avance previamente validado ('+fmtPct(d.avanceAnterior)+'&nbsp;%). Se requiere revisión humana. El sistema no reduce automáticamente el avance ya validado.</div></div></div>';
+  } else if(d.clasificacion==='amarillo'){
+    const razones = [];
+    if((d.avanceDetectado-d.avanceAnterior)<5) razones.push('el resultado está muy cerca del último avance validado');
+    if(d.requiereRevision) razones.push('la propia IA marcó este resultado como "requiere revisión"');
+    if(d.confianza<70) razones.push('el nivel de confianza reportado es bajo ('+fmtPct(d.confianza)+'%)');
+    alertBlock = '<div class="alert-banner warn">'+icon('info')+'<div><div class="at">Avance marginal · conviene revisar</div><div class="ad">'+(razones.length? 'Motivo: '+escapeHtml(razones.join('; '))+'.' : 'El resultado amerita una revisión antes de validarlo.')+' Este es un resultado sujeto a validación humana.</div></div></div>';
+  }
+
+  const photo = '<div class="photo-frame">'+
+      '<img src="'+d.imagen+'" alt="Evidencia fotográfica de '+muro.codigo+'">'+
+      maskOverlayMarkup(d.avanceDetectado, muro.codigo+d.avanceDetectado)+
+      '<div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>'+
+      '<div class="photo-tag">'+muro.codigo+' · '+muro.ubicacion+'</div>'+
+      '<div class="photo-tag right">Estimación IA: '+fmtPct(d.avanceDetectado)+' %</div>'+
+    '</div>'+
+    '<div style="font-size:11px;color:var(--steel-500);margin-top:8px;">'+icon('info')+' Visualización ilustrativa, proporcional al porcentaje estimado. No representa una segmentación espacial real de la imagen ni una medición de precisión absoluta.</div>';
+
+  const readout = '<div class="card card-pad">'+
+    '<div class="card-head" style="margin-bottom:10px;"><span class="card-eyebrow" style="margin-bottom:0;">Resultado de IA</span>'+
+      '<span class="badge '+meta.cls+'"><span class="badge-dot"></span>'+meta.label+'</span></div>'+
+    '<div class="readout">'+
+      '<div class="readout-row"><span class="readout-label">Avance acumulado estimado</span><span class="readout-value big">'+fmtPct(d.avanceDetectado)+'<span class="unit">%</span></span></div>'+
+      '<div class="readout-row"><span class="readout-label">Nivel de confianza</span><span class="readout-value" style="color:var(--confidence-600)">'+fmtPct(d.confianza)+'<span class="unit">%</span></span></div>'+
+      '<div class="readout-row"><span class="readout-label">Área total</span><span class="readout-value">'+fmtArea(d.areaTotal)+'<span class="unit">m²</span></span></div>'+
+      '<div class="readout-row"><span class="readout-label">Área previamente validada</span><span class="readout-value">'+fmtPct(d.avanceAnterior)+'<span class="unit">% · '+fmtArea(d.areaValidadaPrev)+' m²</span></span></div>'+
+      '<div class="readout-row"><span class="readout-label">Nueva cantidad estimada</span><span class="readout-value big" style="color:var(--safety-600)">'+fmtArea(cantidadEstClamped)+'<span class="unit">m²</span></span></div>'+
+    '</div>'+
+    '<div class="readout-sub" style="margin-top:6px;">'+(d.inconsistente? 'Cantidad automática en 0 m² por inconsistencia — requiere revisión manual.' : '('+fmtPct(d.avanceDetectado)+'% − '+fmtPct(d.avanceAnterior)+'%) × '+fmtArea(d.areaTotal)+' m² = '+fmtArea(cantidadEstClamped)+' m²')+'</div>'+
+    '<div class="divider" style="margin:16px 0;"></div>'+
+    '<div class="card-eyebrow" style="margin-bottom:6px;">Observación de la IA</div>'+
+    '<p style="font-size:12.5px;color:var(--ink-800);line-height:1.55;font-style:italic;">"'+escapeHtml(d.descripcion||'Sin observación reportada.')+'"</p>'+
+    '<div class="card-eyebrow" style="margin:14px 0 6px;">Limitaciones detectadas</div>'+
+    (d.limitaciones && d.limitaciones.length ?
+      '<ul style="margin:0;padding-left:18px;font-size:12px;color:var(--steel-500);line-height:1.6;">'+d.limitaciones.map(function(l){return '<li>'+escapeHtml(l)+'</li>';}).join('')+'</ul>'
+      : '<p style="font-size:12px;color:var(--steel-500);">La IA no reportó limitaciones visuales relevantes para esta fotografía.</p>')+
+    '</div>';
+
+  const validacion = '<div class="card card-pad" style="margin-top:16px;">'+
+    '<div class="card-eyebrow">Validación del responsable</div>'+
+    '<h3 style="font-size:15px;margin-bottom:14px;">¿Desea validar la cantidad estimada por el sistema?</h3>'+
+    (showReject ? renderRejectPanel() : renderValidatePanel(cantidadEstClamped, remaining, d.inconsistente))+
+    '</div>';
+
+  return '<div class="card card-pad">'+
+    '<span class="card-eyebrow">Paso 4 de 4'+(d.reviewing?' · Revisión de análisis pendiente':'')+'</span>'+
+    '<h3 style="margin-bottom:14px;">Resultado del análisis — '+muro.codigo+'</h3>'+
+    '<div class="result-grid">'+
+      '<div>'+photo+'</div>'+
+      '<div>'+alertBlock+readout+'</div>'+
+    '</div>'+
+    '</div>'+
+    validacion +
+    '<div style="display:flex;justify-content:space-between;margin-top:16px;">'+
+      (d.reviewing
+        ? '<button class="btn btn-outline" data-action="nav" data-view="pendientes">'+icon('chevron')+' Volver a pendientes</button>'
+        : '<button class="btn btn-outline" data-action="flow-goto" data-step="evidencia">'+icon('chevron')+' Analizar de nuevo</button>')+
+    '</div>';
+}
+
+function renderValidatePanel(cantidadEstClamped, remaining, inconsistente){
+  return '<div class="kv-inline" style="margin-bottom:12px;"><span class="k">Cantidad estimada por IA:</span><span class="v mono">'+fmtArea(cantidadEstClamped)+' m²</span></div>'+
+    '<div class="grid grid-2">'+
+      '<div class="field"><label>Cantidad reconocida (m²)</label>'+
+        '<input type="number" id="cantidadInput" min="0" max="'+remaining+'" step="0.1" value="'+cantidadEstClamped.toFixed(1)+'" oninput="onCantidadInput(this)">'+
+        '<span class="hint" id="avancePreview">'+avancePreviewText(cantidadEstClamped)+'</span>'+
+      '</div>'+
+      '<div class="field"><label>Observaciones (opcional)</label><textarea id="obsInput" placeholder="Ej: se identificó una abertura no considerada por el sistema."></textarea></div>'+
+    '</div>'+
+    '<div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:6px;">'+
+      '<button class="btn btn-validate" data-action="flow-validate" data-mode="validar" '+(inconsistente?'disabled title="No disponible: el avance detectado es inferior al validado."':'')+'>'+icon('check')+' Validar cantidad estimada</button>'+
+      '<button class="btn btn-primary" data-action="flow-validate" data-mode="ajustar">Guardar cantidad ajustada</button>'+
+      '<button class="btn btn-outline" data-action="flow-validate" data-mode="pendiente">Guardar y revisar más tarde</button>'+
+      '<button class="btn btn-ghost" style="color:var(--alert-700);margin-left:auto;" data-action="flow-toggle-reject">Rechazar análisis</button>'+
+    '</div>';
+}
+
+function renderRejectPanel(){
+  return '<div class="field"><label>Motivo del rechazo</label><textarea id="motivoInput" placeholder="Explica por qué se rechaza este análisis (ej: evidencia fotográfica no corresponde al muro, mala iluminación, ángulo insuficiente)."></textarea></div>'+
+    '<div style="display:flex;gap:10px;">'+
+      '<button class="btn btn-danger" data-action="flow-validate" data-mode="rechazar">Confirmar rechazo</button>'+
+      '<button class="btn btn-ghost" data-action="flow-toggle-reject">Cancelar</button>'+
+    '</div>';
+}
+
+function avancePreviewText(cantidad){
+  const d = getFlowResultData();
+  const nuevoAcum = clamp(d.areaValidadaPrev + (parseFloat(cantidad)||0), 0, d.areaTotal);
+  const nuevoPct = d.areaTotal>0 ? (nuevoAcum/d.areaTotal*100) : 0;
+  return 'Nuevo avance validado: '+fmtPct(nuevoPct)+' % (antes '+fmtPct(d.avanceAnterior)+' %) · '+fmtArea(nuevoAcum)+' m² de '+fmtArea(d.areaTotal)+' m²';
+}
+
+function onCantidadInput(el){
+  const remaining = parseFloat(el.max);
+  let v = parseFloat(el.value);
+  if(isNaN(v)) v=0;
+  v = clamp(v,0,remaining);
+  const prevEl = document.getElementById('avancePreview');
+  if(prevEl) prevEl.textContent = avancePreviewText(v);
+}
+
+/* ---------------------------------------------------------
+   ENVÍO DE VALIDACIÓN (crea o resuelve el registro)
+   --------------------------------------------------------- */
+function showToastAndNav(type,msg,view,opts){
+  navigate(view,opts);
+  STATE.toast = {type:type,msg:msg};
+  const app = document.getElementById('app');
+  const existing = app.querySelector('.toast');
+  if(existing) existing.remove();
+  app.insertAdjacentHTML('beforeend', renderToast());
+  setTimeout(function(){ STATE.toast=null; const t=document.querySelector('.toast'); if(t) t.remove(); },3600);
+}
+
+function submitValidation(mode){
+  const reviewing = !!STATE.flow.reviewingRegistroId;
+  const d = getFlowResultData();
+  const muro = d.muro;
+  const cantidadEstClamped = Math.max(0, Math.round(d.nuevaCantidadEstimada*10)/10);
+  const remaining = Math.round((d.areaTotal-d.areaValidadaPrev)*10)/10;
+
+  if(mode==='rechazar'){
+    const motivoEl = document.getElementById('motivoInput');
+    const motivo = motivoEl? motivoEl.value.trim() : '';
+    if(!motivo){ showToast('error','Indica un motivo para rechazar el análisis.'); return; }
+    if(reviewing){
+      const reg = d.reg;
+      reg.estado='Rechazado'; reg.cantidadValidada=0; reg.observaciones=motivo; reg.responsable='Camila Rojas';
+    } else {
+      const reg = {
+        id:uid('REG'), fecha:new Date(), muroCodigo:muro.codigo, contratistaId:muro.contratistaId,
+        avanceAnterior:d.avanceAnterior, avanceDetectado:d.avanceDetectado, confianza:d.confianza,
+        areaTotal:d.areaTotal, areaEstimadaAcum:d.areaEstimadaAcum, nuevaCantidadEstimada:d.nuevaCantidadEstimada,
+        cantidadValidada:0, estado:'Rechazado', responsable:'Camila Rojas', observaciones:motivo,
+        descripcion:d.descripcion, limitaciones:d.limitaciones, requiereRevision:d.requiereRevision, clasificacion:d.clasificacion,
+        imagen:d.imagen, tiempoValidacionMin:null, origen:'live',
+      };
+      muro.historial.unshift(reg); REGISTROS.unshift(reg);
+    }
+    showToastAndNav('error','Análisis rechazado. Se solicitará nueva evidencia fotográfica.','historial');
+    return;
+  }
+
+  let cantidadFinal, estadoFinal;
+  if(mode==='validar'){
+    cantidadFinal = cantidadEstClamped;
+    estadoFinal = 'Validado';
+  } else if(mode==='ajustar'){
+    const inputEl = document.getElementById('cantidadInput');
+    cantidadFinal = clamp(parseFloat(inputEl && inputEl.value!==''? inputEl.value : '0'), 0, remaining);
+    cantidadFinal = Math.round(cantidadFinal*10)/10;
+    estadoFinal = Math.abs(cantidadFinal-cantidadEstClamped)<0.05 ? 'Validado' : 'Ajustado';
+  } else {
+    cantidadFinal = null; estadoFinal = 'Pendiente';
+  }
+  const obsEl = document.getElementById('obsInput');
+  const obs = obsEl? obsEl.value.trim() : '';
+
+  if(reviewing){
+    const reg = d.reg;
+    reg.estado=estadoFinal; reg.cantidadValidada=cantidadFinal; reg.observaciones=obs; reg.responsable='Camila Rojas';
+    reg.tiempoValidacionMin = 2 + (hashStr(reg.id)%9);
+    if(estadoFinal==='Validado'||estadoFinal==='Ajustado') recomputeMuroAggregates(muro);
+  } else {
+    const reg = {
+      id:uid('REG'), fecha:new Date(), muroCodigo:muro.codigo, contratistaId:muro.contratistaId,
+      avanceAnterior:d.avanceAnterior, avanceDetectado:d.avanceDetectado, confianza:d.confianza,
+      areaTotal:d.areaTotal, areaEstimadaAcum:d.areaEstimadaAcum, nuevaCantidadEstimada:d.nuevaCantidadEstimada,
+      cantidadValidada:cantidadFinal, estado:estadoFinal, responsable:'Camila Rojas', observaciones:obs,
+      descripcion:d.descripcion, limitaciones:d.limitaciones, requiereRevision:d.requiereRevision, clasificacion:d.clasificacion,
+      imagen:d.imagen, tiempoValidacionMin: STATE.flow.analysisDoneAt ? Math.max(0.5, Math.round((Date.now()-STATE.flow.analysisDoneAt)/6000)/10) : null,
+      origen:'live',
+    };
+    muro.historial.unshift(reg); REGISTROS.unshift(reg);
+    if(estadoFinal==='Validado'||estadoFinal==='Ajustado') recomputeMuroAggregates(muro);
+  }
+
+  if(mode==='pendiente'){
+    showToastAndNav('success','Registro guardado como pendiente de validación.','pendientes');
+  } else {
+    showToastAndNav('success','Cantidad registrada. Avance de '+muro.codigo+' actualizado a '+fmtPct(muro.avanceValidado)+' %.','muro-detalle',{detalleMuroCodigo:muro.codigo});
+  }
+}
+
+/* ---------------------------------------------------------
+   PANTALLA: ANÁLISIS POR IA (módulo — explicación + recientes)
+   --------------------------------------------------------- */
+function renderAnalisisIA(){
+  const recientes = REGISTROS.slice(0,12);
+  const arch = [
+    {t:'Entrada', d:'Fotografía del muro + contexto del elemento (código, dimensiones, avance previo).'},
+    {t:'Servicio de IA', d:'Claude (Anthropic), con visión multimodal, analiza la imagen junto con el contexto enviado.'},
+    {t:'Resultado estructurado', d:'Porcentaje estimado, nivel de confianza, observación y limitaciones detectadas.'},
+    {t:'Cálculo', d:'Área total del elemento × porcentaje estimado − área ya validada.'},
+    {t:'Validación', d:'Decisión humana del ingeniero residente: validar, ajustar o rechazar.'},
+  ];
+  return '<div style="display:flex;flex-direction:column;gap:18px;">'+
+    '<div class="card card-pad">'+
+      '<div class="grid" style="grid-template-columns:1.3fr 1fr;gap:24px;align-items:center;">'+
+        '<div>'+
+          '<div class="card-eyebrow">Módulo de inteligencia artificial</div>'+
+          '<h3 style="font-size:20px;margin-bottom:8px;">La IA estima. El ingeniero valida. El sistema registra.</h3>'+
+          '<p style="color:var(--steel-500);font-size:13px;line-height:1.6;max-width:52ch;">El módulo envía la fotografía cargada, junto con el contexto del elemento, a un modelo de IA con visión multimodal para obtener una <b>estimación</b> de apoyo — no una medición exacta. El resultado siempre queda sujeto a validación humana antes de registrarse como avance oficial.</p>'+
+          '<button class="btn btn-primary" style="margin-top:16px;" data-action="nav" data-view="registrar">'+icon('registrar')+' Iniciar nuevo análisis</button>'+
+        '</div>'+
+        '<div class="console-wrap" style="padding:22px;">'+consoleScanSvg()+'</div>'+
+      '</div>'+
+    '</div>'+
+
+    '<div class="card card-pad">'+
+      '<div class="card-eyebrow" style="margin-bottom:10px;">Arquitectura del análisis</div>'+
+      '<div class="grid grid-4" style="gap:12px;">'+
+        arch.map(function(a,i){
+          return '<div class="card" style="padding:14px 14px;background:var(--concrete-50);">'+
+            '<div class="mono" style="font-size:10px;color:var(--steel-500);letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px;">Etapa '+(i+1)+'</div>'+
+            '<div style="font-weight:700;font-size:13px;margin-bottom:4px;">'+a.t+'</div>'+
+            '<div style="font-size:11.5px;color:var(--steel-500);line-height:1.45;">'+a.d+'</div>'+
+          '</div>';
+        }).join('')+
+      '</div>'+
+      '<div class="notice-banner" style="margin-top:16px;margin-bottom:0;">'+icon('info')+'<span>La IA no calcula pagos ni reemplaza el criterio del residente: solo apoya la estimación del avance físico visible. La conexión al servicio de IA requiere que este prototipo se ejecute dentro del entorno de Claude; si se abre fuera de ese entorno, el paso de análisis mostrará un error de conexión en lugar de inventar un resultado.</span></div>'+
+    '</div>'+
+
+    '<div class="card card-pad">'+
+      '<div class="card-head"><span class="card-title">Análisis recientes</span></div>'+
+      '<div class="table-wrap"><table><thead><tr><th>Fecha</th><th>Muro</th><th>Contratista</th><th class="num">Avance detectado</th><th class="num">Confianza</th><th>Estado</th><th></th></tr></thead><tbody>'+
+      recientes.map(function(r){
+        return '<tr class="row-link" data-action="open-registro" data-id="'+r.id+'">'+
+          '<td class="mono cell-muted">'+fmtFechaCorta(r.fecha)+' '+fmtHora(r.fecha)+'</td>'+
+          '<td class="cell-code">'+r.muroCodigo+'</td>'+
+          '<td>'+contratistaNombre(r.contratistaId)+'</td>'+
+          '<td class="num mono">'+fmtPct(r.avanceDetectado)+' %</td>'+
+          '<td class="num mono">'+fmtPct(r.confianza)+' %</td>'+
+          '<td>'+badge(r.estado)+'</td>'+
+          '<td class="cell-muted">'+icon('chevron')+'</td>'+
+          '</tr>';
+      }).join('')+
+      '</tbody></table></div>'+
+    '</div>'+
+  '</div>';
+}
+
+/* ---------------------------------------------------------
+   PANTALLA: VALIDACIONES PENDIENTES
+   --------------------------------------------------------- */
+function renderPendientes(){
+  const pend = REGISTROS.filter(function(r){return r.estado==='Pendiente';}).sort(function(a,b){return a.fecha-b.fecha;});
+  if(pend.length===0){
+    return '<div class="card">'+emptyState('No hay validaciones pendientes','Todos los análisis ejecutados ya fueron revisados por un responsable.','check')+'</div>';
+  }
+  return '<div class="card card-pad">'+
+    '<div class="card-head"><span class="card-title">'+pend.length+' registro'+(pend.length===1?'':'s')+' a la espera de validación</span></div>'+
+    '<div class="table-wrap"><table><thead><tr><th>Fecha</th><th>Elemento</th><th>Ubicación</th><th>Contratista</th><th class="num">Avance IA</th><th class="num">Confianza</th><th class="num">Cantidad estimada</th><th>Estado</th><th></th></tr></thead><tbody>'+
+    pend.map(function(r){
+      const m = getMuro(r.muroCodigo);
+      return '<tr>'+
+        '<td class="mono cell-muted">'+fmtFecha(r.fecha)+'</td>'+
+        '<td class="cell-code">'+r.muroCodigo+'</td>'+
+        '<td class="cell-muted">'+(m?m.ubicacion:'—')+'</td>'+
+        '<td>'+contratistaNombre(r.contratistaId)+'</td>'+
+        '<td class="num mono">'+fmtPct(r.avanceDetectado)+' %</td>'+
+        '<td class="num mono">'+fmtPct(r.confianza)+' %</td>'+
+        '<td class="num mono">'+fmtArea(r.nuevaCantidadEstimada)+' m²</td>'+
+        '<td>'+badge(r.estado)+'</td>'+
+        '<td><button class="btn btn-outline btn-sm" data-action="review-pendiente" data-id="'+r.id+'">Ver detalle</button></td>'+
+        '</tr>';
+    }).join('')+
+    '</tbody></table></div>'+
+    '</div>';
+}
+
+/* ---------------------------------------------------------
+   PANTALLA: HISTORIAL DE AVANCES
+   --------------------------------------------------------- */
+function renderHistorial(){
+  const f = STATE.historial;
+  const zonas = Array.from(new Set(MUROS.map(function(m){return m.zona;})));
+  let regs = REGISTROS.filter(function(r){return r.estado!=='Pendiente';});
+  if(f.zona) regs = regs.filter(function(r){ const m=getMuro(r.muroCodigo); return m&&m.zona===f.zona; });
+  if(f.contratista) regs = regs.filter(function(r){return r.contratistaId===f.contratista;});
+  if(f.muro) regs = regs.filter(function(r){return r.muroCodigo===f.muro;});
+  if(f.estado) regs = regs.filter(function(r){return r.estado===f.estado;});
+  if(f.desde){ const dd=new Date(f.desde); regs = regs.filter(function(r){return r.fecha>=dd;}); }
+  if(f.hasta){ const dh=new Date(f.hasta); dh.setHours(23,59,59); regs = regs.filter(function(r){return r.fecha<=dh;}); }
+  regs = regs.slice().sort(function(a,b){return b.fecha-a.fecha;});
+
+  const filtros = '<div class="filters-row">'+
+    '<div class="field"><label>Zona</label><select data-action="hist-filter" data-field="zona"><option value="">Todas</option>'+
+      zonas.map(function(z){return '<option value="'+z+'" '+(f.zona===z?'selected':'')+'>'+z+'</option>';}).join('')+'</select></div>'+
+    '<div class="field"><label>Contratista</label><select data-action="hist-filter" data-field="contratista"><option value="">Todos</option>'+
+      CONTRATISTAS.map(function(c){return '<option value="'+c.id+'" '+(f.contratista===c.id?'selected':'')+'>'+c.nombre+'</option>';}).join('')+'</select></div>'+
+    '<div class="field"><label>Muro</label><select data-action="hist-filter" data-field="muro"><option value="">Todos</option>'+
+      MUROS.map(function(m){return '<option value="'+m.codigo+'" '+(f.muro===m.codigo?'selected':'')+'>'+m.codigo+'</option>';}).join('')+'</select></div>'+
+    '<div class="field"><label>Estado</label><select data-action="hist-filter" data-field="estado"><option value="">Todos</option>'+
+      ['Validado','Ajustado','Rechazado'].map(function(e){return '<option value="'+e+'" '+(f.estado===e?'selected':'')+'>'+e+'</option>';}).join('')+'</select></div>'+
+    '<div class="field"><label>Desde</label><input type="date" data-action="hist-filter" data-field="desde" value="'+f.desde+'"></div>'+
+    '<div class="field"><label>Hasta</label><input type="date" data-action="hist-filter" data-field="hasta" value="'+f.hasta+'"></div>'+
+    '<button class="btn btn-ghost btn-sm" data-action="hist-clear">Limpiar filtros</button>'+
+    '</div>';
+
+  const tabla = regs.length===0 ? emptyState('Sin resultados','Ajusta los filtros para ver registros del historial.','historial') :
+    '<div class="table-wrap"><table><thead><tr><th>Fecha</th><th>Muro</th><th>Contratista</th><th class="num">Avance anterior</th><th class="num">Avance detectado</th><th class="num">Cant. estimada</th><th class="num">Cant. validada</th><th>Estado</th><th></th></tr></thead><tbody>'+
+    regs.map(function(r){
+      return '<tr class="row-link" data-action="open-muro" data-codigo="'+r.muroCodigo+'">'+
+        '<td class="mono cell-muted">'+fmtFecha(r.fecha)+'</td>'+
+        '<td class="cell-code">'+r.muroCodigo+'</td>'+
+        '<td>'+contratistaNombre(r.contratistaId)+'</td>'+
+        '<td class="num mono cell-muted">'+fmtPct(r.avanceAnterior)+' %</td>'+
+        '<td class="num mono">'+fmtPct(r.avanceDetectado)+' %</td>'+
+        '<td class="num mono">'+fmtArea(r.nuevaCantidadEstimada)+' m²</td>'+
+        '<td class="num mono">'+(r.cantidadValidada!==null? fmtArea(r.cantidadValidada)+' m²':'—')+'</td>'+
+        '<td>'+badge(r.estado)+'</td>'+
+        '<td class="cell-muted">'+icon('chevron')+'</td>'+
+        '</tr>';
+    }).join('')+
+    '</tbody></table></div>';
+
+  return '<div style="display:flex;flex-direction:column;gap:16px;">'+
+    '<div class="card card-pad">'+filtros+tabla+'</div>'+
+    (f.muro ? renderEvolucionMuro(getMuro(f.muro)) : '')+
+  '</div>';
+}
+
+function renderEvolucionMuro(muro){
+  if(!muro) return '';
+  const stages = muro.historial.filter(function(r){return r.estado!=='Pendiente';}).slice().sort(function(a,b){return a.fecha-b.fecha;});
+  const hitos = [0].concat(stages.map(function(r){return r.avanceDetectado;}));
+  return '<div class="card card-pad">'+
+    '<div class="card-head"><span class="card-title">Línea de evolución — '+muro.codigo+'</span>'+
+    '<button class="btn btn-ghost btn-sm" data-action="open-muro" data-codigo="'+muro.codigo+'">Ver ficha completa '+icon('chevron')+'</button></div>'+
+    '<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">'+
+      hitos.map(function(h,i){
+        return (i>0?'<span style="color:var(--line-300)">'+icon('chevron')+'</span>':'')+
+          '<span class="tag-chip" style="'+(i===hitos.length-1?'background:var(--validate-100);color:var(--validate-700);border-color:var(--validate-100);':'')+'">'+fmtPct(h)+' %</span>';
+      }).join('')+
+    '</div>'+
+    '</div>';
+}
+
+
+/* ---------------------------------------------------------
+   PANTALLA: FICHA / DETALLE DEL MURO
+   --------------------------------------------------------- */
+function renderDetalleMuro(){
+  const muro = getMuro(STATE.detalleMuroCodigo);
+  if(!muro) return '<div class="card">'+emptyState('Elemento no encontrado','Vuelve al catálogo de elementos constructivos.','elementos')+'</div>';
+  const c = getContratista(muro.contratistaId);
+  const pendienteArea = Math.round((muro.areaTotal-muro.areaValidada)*10)/10;
+  const pendientePct = Math.round((100-muro.avanceValidado)*10)/10;
+  const eventos = muro.historial.slice().sort(function(a,b){return b.fecha-a.fecha;});
+  const tienePendiente = eventos.some(function(r){return r.estado==='Pendiente';});
+
+  return '<div style="display:flex;flex-direction:column;gap:16px;">'+
+    '<div class="card card-pad">'+
+      '<div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:14px;">'+
+        '<div>'+
+          '<div class="card-eyebrow">Ficha del elemento constructivo</div>'+
+          '<h3 style="font-size:22px;">'+muro.codigo+'</h3>'+
+          '<div style="color:var(--steel-500);font-size:12.5px;margin-top:4px;">'+muro.ubicacion+' · '+muro.actividad+'</div>'+
+        '</div>'+
+        (muro.avanceValidado<100 && !tienePendiente ?
+          '<button class="btn btn-primary" data-action="start-registro" data-codigo="'+muro.codigo+'">'+icon('registrar')+' Registrar nuevo avance</button>' :
+          (tienePendiente ? '<span class="badge badge-pendiente"><span class="badge-dot"></span>Análisis pendiente de validación</span>' : '<span class="badge badge-validado"><span class="badge-dot"></span>Elemento validado al 100 %</span>'))+
+      '</div>'+
+      '<div class="divider"></div>'+
+      '<div class="readonly-grid">'+
+        '<div class="readonly-item"><div class="rl-label">Contratista</div><div class="rl-value small">'+(c?c.nombre:'—')+'</div></div>'+
+        '<div class="readonly-item"><div class="rl-label">Área total</div><div class="rl-value">'+fmtArea(muro.areaTotal)+' <span style="font-size:12px;color:var(--steel-500);">m²</span></div></div>'+
+        '<div class="readonly-item"><div class="rl-label">Área validada</div><div class="rl-value">'+fmtArea(muro.areaValidada)+' <span style="font-size:12px;color:var(--steel-500);">m²</span></div></div>'+
+        '<div class="readonly-item"><div class="rl-label">Área pendiente</div><div class="rl-value">'+fmtArea(pendienteArea)+' <span style="font-size:12px;color:var(--steel-500);">m²</span></div></div>'+
+      '</div>'+
+      '<div style="margin-top:16px;display:flex;align-items:center;gap:14px;">'+
+        '<div style="flex:1;">'+progressBar(muro.avanceValidado,{cls:'validate'})+'</div>'+
+        '<div class="mono" style="font-weight:700;">'+fmtPct(muro.avanceValidado)+' %</div>'+
+      '</div>'+
+      '<div style="font-size:11.5px;color:var(--steel-500);margin-top:6px;">Avance validado: '+fmtPct(muro.avanceValidado)+' % · Avance pendiente: '+fmtPct(pendientePct)+' % ('+fmtArea(pendienteArea)+' m²) · Largo '+muro.largo+' m × Alto '+muro.alto+' m</div>'+
+    '</div>'+
+
+    '<div class="card card-pad">'+
+      '<div class="card-head"><span class="card-title">Trazabilidad — línea de tiempo</span></div>'+
+      (eventos.length===0 ? emptyState('Sin registros todavía','Este elemento aún no tiene evidencia fotográfica ni análisis.','wall') :
+      '<div class="timeline">'+
+        eventos.map(function(r){
+          const dotCls = r.estado==='Pendiente' ? 'pend' : (r.estado==='Rechazado' ? 'rej' : '');
+          return '<div class="tl-item">'+
+            '<div class="tl-dot '+dotCls+'"></div>'+
+            '<div class="tl-head">'+
+              '<span class="tl-date">'+fmtFecha(r.fecha)+'</span>'+badge(r.estado)+
+              '<span class="mono" style="font-size:12px;color:var(--ink-800);">'+fmtPct(r.avanceAnterior)+'% → '+fmtPct(r.avanceDetectado)+'%</span>'+
+            '</div>'+
+            '<div style="display:flex;gap:12px;margin-top:8px;align-items:flex-start;">'+
+              '<img src="'+r.imagen+'" style="width:78px;height:56px;object-fit:cover;border-radius:4px;border:1px solid var(--line-200);flex:none;">'+
+              '<div style="font-size:12px;color:var(--steel-500);">'+
+                'Confianza IA: <b class="mono" style="color:var(--ink-800)">'+fmtPct(r.confianza)+'%</b> · '+
+                'Cantidad estimada: <b class="mono" style="color:var(--ink-800)">'+fmtArea(r.nuevaCantidadEstimada)+' m²</b>'+
+                (r.cantidadValidada!==null? ' · Cantidad validada: <b class="mono" style="color:var(--ink-800)">'+fmtArea(r.cantidadValidada)+' m²</b>' : '')+
+                (r.responsable? ' · Responsable: '+r.responsable : '')+
+                (r.observaciones? '<div style="margin-top:3px;font-style:italic;">"'+escapeHtml(r.observaciones)+'"</div>' : '')+
+              '</div>'+
+            '</div>'+
+          '</div>';
+        }).join('')+
+      '</div>')+
+    '</div>'+
+  '</div>';
+}
+
+/* ---------------------------------------------------------
+   PANTALLA: ELEMENTOS CONSTRUCTIVOS (catálogo)
+   --------------------------------------------------------- */
+function renderElementos(){
+  const f = STATE.elementos;
+  const zonas = Array.from(new Set(MUROS.map(function(m){return m.zona;})));
+  let list = MUROS.slice();
+  if(f.zona) list = list.filter(function(m){return m.zona===f.zona;});
+  if(f.contratista) list = list.filter(function(m){return m.contratistaId===f.contratista;});
+  if(f.estado) list = list.filter(function(m){return estadoMuro(m)===f.estado || (f.estado==='Validado'&&m.avanceValidado>=100);});
+  list.sort(function(a,b){ return a.codigo.localeCompare(b.codigo); });
+
+  const filtros = '<div class="filters-row">'+
+    '<div class="field"><label>Zona</label><select data-action="elem-filter" data-field="zona"><option value="">Todas</option>'+
+      zonas.map(function(z){return '<option value="'+z+'" '+(f.zona===z?'selected':'')+'>'+z+'</option>';}).join('')+'</select></div>'+
+    '<div class="field"><label>Contratista</label><select data-action="elem-filter" data-field="contratista"><option value="">Todos</option>'+
+      CONTRATISTAS.map(function(c){return '<option value="'+c.id+'" '+(f.contratista===c.id?'selected':'')+'>'+c.nombre+'</option>';}).join('')+'</select></div>'+
+    '<div class="field"><label>Estado</label><select data-action="elem-filter" data-field="estado"><option value="">Todos</option>'+
+      ['Sin iniciar','En proceso','Validado'].map(function(e){return '<option value="'+e+'" '+(f.estado===e?'selected':'')+'>'+e+'</option>';}).join('')+'</select></div>'+
+    '<button class="btn btn-ghost btn-sm" data-action="elem-clear">Limpiar filtros</button>'+
+    '</div>';
+
+  const tabla = '<div class="table-wrap"><table><thead><tr><th>Código</th><th>Ubicación</th><th>Contratista</th><th class="num">Área total</th><th class="num">Avance</th><th>Estado</th><th></th></tr></thead><tbody>'+
+    list.map(function(m){
+      return '<tr>'+
+        '<td class="cell-code row-link" data-action="open-muro" data-codigo="'+m.codigo+'">'+m.codigo+'</td>'+
+        '<td class="cell-muted">'+m.ubicacion+'</td>'+
+        '<td>'+contratistaNombre(m.contratistaId)+'</td>'+
+        '<td class="num mono">'+fmtArea(m.areaTotal)+' m²</td>'+
+        '<td class="num mono">'+fmtPct(m.avanceValidado)+' %</td>'+
+        '<td>'+badge(estadoMuro(m))+'</td>'+
+        '<td style="display:flex;gap:6px;justify-content:flex-end;">'+
+          '<button class="btn btn-ghost btn-sm" data-action="open-muro" data-codigo="'+m.codigo+'">Ver ficha</button>'+
+          (m.avanceValidado<100? '<button class="btn btn-outline btn-sm" data-action="start-registro" data-codigo="'+m.codigo+'">Registrar avance</button>' : '')+
+        '</td>'+
+        '</tr>';
+    }).join('')+
+    '</tbody></table></div>';
+
+  return '<div class="card card-pad">'+
+    '<div class="card-head"><span class="card-title">'+list.length+' elemento'+(list.length===1?'':'s')+' registrado'+(list.length===1?'':'s')+'</span></div>'+
+    filtros+tabla+
+    '</div>';
+}
+
+/* ---------------------------------------------------------
+   PANTALLA: CONTRATISTAS
+   --------------------------------------------------------- */
+function renderContratistas(){
+  if(STATE.contratistaDetalleId) return renderContratistaDetalle(STATE.contratistaDetalleId);
+  const datos = validadoPorContratista();
+  return '<div class="grid grid-3">'+
+    datos.map(function(d){
+      const pct = d.total>0? (d.val/d.total*100):0;
+      return '<div class="card card-pad row-link" data-action="open-contratista" data-id="'+d.contratista.id+'">'+
+        '<div class="card-eyebrow">'+d.contratista.actividad+'</div>'+
+        '<h3 style="font-size:16px;margin-bottom:10px;">'+d.contratista.nombre+'</h3>'+
+        '<div class="readonly-grid" style="grid-template-columns:1fr 1fr;">'+
+          '<div class="readonly-item"><div class="rl-label">Área asignada</div><div class="rl-value small">'+fmtArea(d.total)+' m²</div></div>'+
+          '<div class="readonly-item"><div class="rl-label">Área validada</div><div class="rl-value small">'+fmtArea(d.val)+' m²</div></div>'+
+        '</div>'+
+        '<div style="margin-top:12px;">'+progressBar(pct,{cls:'validate'})+'</div>'+
+        '<div style="display:flex;justify-content:space-between;margin-top:8px;font-size:11.5px;color:var(--steel-500);">'+
+          '<span>Avance '+fmtPct(pct)+' %</span><span>'+d.pendientes+' pendiente'+(d.pendientes===1?'':'s')+'</span>'+
+        '</div>'+
+      '</div>';
+    }).join('')+
+  '</div>';
+}
+
+function renderContratistaDetalle(id){
+  const c = getContratista(id);
+  if(!c) return renderContratistas();
+  const muros = MUROS.filter(function(m){return m.contratistaId===id;});
+  const total = muros.reduce(function(s,m){return s+m.areaTotal;},0);
+  const val = muros.reduce(function(s,m){return s+m.areaValidada;},0);
+  const pct = total>0? (val/total*100):0;
+  const regs = REGISTROS.filter(function(r){return r.contratistaId===id;}).slice().sort(function(a,b){return b.fecha-a.fecha;});
+  const pend = regs.filter(function(r){return r.estado==='Pendiente';}).length;
+
+  return '<div style="display:flex;flex-direction:column;gap:16px;">'+
+    '<button class="btn btn-ghost btn-sm" data-action="back-contratistas" style="align-self:flex-start;">'+icon('chevron')+' Volver a contratistas</button>'+
+    '<div class="card card-pad">'+
+      '<div class="card-eyebrow">'+c.actividad+' · '+c.contacto+'</div>'+
+      '<h3 style="font-size:20px;margin-bottom:14px;">'+c.nombre+'</h3>'+
+      '<div class="grid grid-4">'+
+        kpiCard('Área contratada (mampostería)', fmtArea(total), 'm²')+
+        kpiCard('Área validada', fmtArea(val), 'm²', fmtPct(pct)+'% de avance')+
+        kpiCard('Registros pendientes', pend, '', pend>0?'Requieren revisión':'Al día', pend>0?'warn':'up')+
+        kpiCard('Elementos asignados', muros.length, '')+
+      '</div>'+
+      '<div class="divider"></div>'+
+      '<div class="card-eyebrow" style="margin-bottom:8px;">Resumen de avance reconocido</div>'+
+      '<div style="display:flex;align-items:center;gap:14px;">'+
+        '<div style="flex:1;">'+progressBar(pct,{cls:'validate'})+'</div>'+
+        '<div class="mono" style="font-weight:700;">'+fmtPct(pct)+' %</div>'+
+      '</div>'+
+      '<div class="notice-banner" style="margin-top:14px;margin-bottom:0;">'+icon('info')+'<span>Información disponible para soporte del corte. No representa un reconocimiento de pago automático; el uso de estas cantidades para procesos de corte o pago queda a criterio del área administrativa del proyecto.</span></div>'+
+    '</div>'+
+
+    '<div class="card card-pad">'+
+      '<div class="card-head"><span class="card-title">Elementos asignados</span></div>'+
+      '<div class="table-wrap"><table><thead><tr><th>Código</th><th>Ubicación</th><th class="num">Área total</th><th class="num">Avance</th><th>Estado</th></tr></thead><tbody>'+
+      muros.map(function(m){
+        return '<tr class="row-link" data-action="open-muro" data-codigo="'+m.codigo+'">'+
+          '<td class="cell-code">'+m.codigo+'</td><td class="cell-muted">'+m.ubicacion+'</td>'+
+          '<td class="num mono">'+fmtArea(m.areaTotal)+' m²</td><td class="num mono">'+fmtPct(m.avanceValidado)+' %</td>'+
+          '<td>'+badge(estadoMuro(m))+'</td></tr>';
+      }).join('')+
+      '</tbody></table></div>'+
+    '</div>'+
+
+    '<div class="card card-pad">'+
+      '<div class="card-head"><span class="card-title">Registros relacionados</span></div>'+
+      '<div class="table-wrap"><table><thead><tr><th>Fecha</th><th>Muro</th><th class="num">Avance IA</th><th class="num">Cant. validada</th><th>Estado</th></tr></thead><tbody>'+
+      regs.slice(0,15).map(function(r){
+        return '<tr class="row-link" data-action="open-registro" data-id="'+r.id+'">'+
+          '<td class="mono cell-muted">'+fmtFecha(r.fecha)+'</td><td class="cell-code">'+r.muroCodigo+'</td>'+
+          '<td class="num mono">'+fmtPct(r.avanceDetectado)+' %</td>'+
+          '<td class="num mono">'+(r.cantidadValidada!==null?fmtArea(r.cantidadValidada)+' m²':'—')+'</td>'+
+          '<td>'+badge(r.estado)+'</td></tr>';
+      }).join('')+
+      '</tbody></table></div>'+
+    '</div>'+
+  '</div>';
+}
+
+/* ---------------------------------------------------------
+   PANTALLA: REPORTES Y CONSOLIDACIÓN
+   --------------------------------------------------------- */
+function renderReportes(){
+  const porContratista = validadoPorContratista();
+  const porZona = avancePorZona();
+  const evol = evolucionAcumuladaMensual();
+  const dif = diferenciaIAvsValidacion();
+  const tiempoProm = tiempoPromedioValidacion();
+  const dist = distribucionEstados();
+  const pend = pendientesCount();
+
+  const indicadores = [
+    {l:'Avance validado', v:fmtPct(avanceGlobalPct())+' %'},
+    {l:'Metros cuadrados validados', v:fmtArea(totalAreaValidada())+' m²'},
+    {l:'Registros pendientes', v:pend},
+    {l:'Tiempo promedio de validación', v:(tiempoProm<1? Math.round(tiempoProm*60)+' seg' : fmtPct(tiempoProm)+' min')},
+    {l:'Diferencia promedio IA vs. validación', v:fmtArea(dif.promedio)+' m² ('+fmtPct(dif.promedioPct)+'%)'},
+    {l:'Validados sin ajuste', v:fmtPct(dist.validadoPct)+' %'},
+    {l:'Registros ajustados', v:fmtPct(dist.ajustadoPct)+' %'},
+    {l:'Registros rechazados', v:fmtPct(dist.rechazadoPct)+' %'},
+  ];
+
+  const difTabla = REGISTROS.filter(function(r){return r.estado==='Ajustado';}).slice(0,10);
+
+  return '<div style="display:flex;flex-direction:column;gap:16px;">'+
+    '<div class="card card-pad">'+
+      '<div class="card-head"><span class="card-title">Indicadores del sistema</span></div>'+
+      '<div class="grid grid-4">'+
+        indicadores.map(function(i){ return '<div class="stat-mini"><span class="sm-label">'+i.l+'</span><span class="sm-value">'+i.v+'</span></div>'; }).join('')+
+      '</div>'+
+    '</div>'+
+
+    '<div class="two-col">'+
+      '<div class="card card-pad"><div class="card-head"><span class="card-title">m² validados por contratista</span></div>'+
+        svgBarChart({labels:porContratista.map(function(c){return c.contratista.nombre.split(' ')[0];}), values:porContratista.map(function(c){return Math.round(c.val*10)/10;}), unit:' m²', colors:porContratista.map(function(){return 'var(--safety-500)';})})+
+      '</div>'+
+      '<div class="card card-pad"><div class="card-head"><span class="card-title">m² validados por zona</span></div>'+
+        svgBarChart({labels:porZona.map(function(z){return z.zona;}), values:porZona.map(function(z){return Math.round(z.val*10)/10;}), unit:' m²', colors:porZona.map(function(){return 'var(--confidence-600)';})})+
+      '</div>'+
+    '</div>'+
+
+    '<div class="card card-pad">'+
+      '<div class="card-head"><span class="card-title">Evolución del avance (m² validados acumulados)</span></div>'+
+      svgLineChart({labels:evol.labels, values:evol.values, unit:' m²'})+
+    '</div>'+
+
+    '<div class="two-col">'+
+      '<div class="card card-pad">'+
+        '<div class="card-head"><span class="card-title">Análisis pendientes</span></div>'+
+        (pend===0? emptyState('Sin pendientes','No hay análisis a la espera de validación.','check') :
+        '<div class="table-wrap"><table><thead><tr><th>Muro</th><th class="num">Avance IA</th><th>Estado</th></tr></thead><tbody>'+
+          REGISTROS.filter(function(r){return r.estado==='Pendiente';}).map(function(r){
+            return '<tr class="row-link" data-action="review-pendiente" data-id="'+r.id+'"><td class="cell-code">'+r.muroCodigo+'</td><td class="num mono">'+fmtPct(r.avanceDetectado)+' %</td><td>'+badge(r.estado)+'</td></tr>';
+          }).join('')+
+        '</tbody></table></div>')+
+      '</div>'+
+      '<div class="card card-pad">'+
+        '<div class="card-head"><span class="card-title">Diferencia IA vs. validación humana</span></div>'+
+        (difTabla.length===0 ? emptyState('Sin ajustes registrados','Todos los análisis se validaron tal como fueron estimados.','check') :
+        '<div class="table-wrap"><table><thead><tr><th>Muro</th><th class="num">IA</th><th class="num">Validado</th><th class="num">Dif.</th></tr></thead><tbody>'+
+          difTabla.map(function(r){
+            const diff = Math.round((r.nuevaCantidadEstimada-r.cantidadValidada)*10)/10;
+            return '<tr class="row-link" data-action="open-muro" data-codigo="'+r.muroCodigo+'"><td class="cell-code">'+r.muroCodigo+'</td>'+
+              '<td class="num mono">'+fmtArea(r.nuevaCantidadEstimada)+'</td><td class="num mono">'+fmtArea(r.cantidadValidada)+'</td>'+
+              '<td class="num mono" style="color:var(--safety-600)">'+(diff>=0?'+':'')+fmtArea(diff)+'</td></tr>';
+          }).join('')+
+        '</tbody></table></div>')+
+      '</div>'+
+    '</div>'+
+  '</div>';
+}
+
+/* ---------------------------------------------------------
+   MANEJO DE EVENTOS (delegación sobre #app)
+   --------------------------------------------------------- */
+function readImageFile(file){
+  if(!file || file.type.indexOf('image/')!==0){ showToast('error','Selecciona un archivo de imagen válido.'); return; }
+  const reader = new FileReader();
+  reader.onload = function(ev){
+    STATE.flow.imagen = ev.target.result;
+    STATE.flow.imagenLabel = file.name;
+    render();
+  };
+  reader.readAsDataURL(file);
+}
+
+function handleAppClick(e){
+  const el = e.target.closest('[data-action]');
+  if(!el) return;
+  const action = el.dataset.action;
+
+  switch(action){
+    case 'login-submit':
+      doLogin();
+      break;
+    case 'logout':
+      logout();
+      break;
+    case 'nav':
+      navigate(el.dataset.view);
+      break;
+    case 'toggle-sidebar':
+      STATE.sidebarOpen = !STATE.sidebarOpen;
+      render();
+      break;
+    case 'flow-goto':
+      STATE.flow.step = el.dataset.step;
+      STATE.flow.showReject = false;
+      render();
+      break;
+    case 'flow-mode':
+      STATE.flow.modo = el.dataset.mode;
+      render();
+      break;
+    case 'flow-clear-image':
+      STATE.flow.imagen = null; STATE.flow.imagenLabel='';
+      render();
+      break;
+    case 'flow-demo-image':{
+      const muro = getMuro(STATE.flow.muroCodigo);
+      /* Imagen ilustrativa de referencia (para quien no tiene una fotografía
+         a mano). No predetermina el resultado: el servicio de IA analizará
+         esta imagen igual que analizaría una fotografía real. */
+      const ilustrativoPct = clamp(muro.avanceValidado + 20, 0, 100);
+      STATE.flow.imagen = demoWallImage(ilustrativoPct, hashStr(muro.codigo));
+      STATE.flow.imagenLabel = 'Fotografía de referencia (demostración)';
+      render();
+      break;
+    }
+    case 'flow-analizar':
+      if(!STATE.flow.imagen){ showToast('error','Carga una fotografía antes de analizar.'); return; }
+      STATE.flow.analysisError = null;
+      STATE.flow.step = 'analizando';
+      render();
+      break;
+    case 'flow-toggle-reject':
+      STATE.flow.showReject = !STATE.flow.showReject;
+      render();
+      break;
+    case 'flow-validate':
+      submitValidation(el.dataset.mode);
+      break;
+    case 'guardar-nuevo-elemento':
+      guardarNuevoElemento();
+      break;
+    case 'open-registro':{
+      const reg = REGISTROS.find(function(r){return r.id===el.dataset.id;});
+      if(!reg) return;
+      if(reg.estado==='Pendiente'){
+        STATE.view='registrar';
+        resetFlow({step:'resultado', muroCodigo:reg.muroCodigo, reviewingRegistroId:reg.id});
+        render();
+      } else {
+        navigate('muro-detalle',{detalleMuroCodigo:reg.muroCodigo});
+      }
+      break;
+    }
+    case 'review-pendiente':{
+      const reg = REGISTROS.find(function(r){return r.id===el.dataset.id;});
+      if(!reg) return;
+      STATE.view='registrar';
+      resetFlow({step:'resultado', muroCodigo:reg.muroCodigo, reviewingRegistroId:reg.id});
+      render();
+      break;
+    }
+    case 'open-muro':
+      navigate('muro-detalle',{detalleMuroCodigo:el.dataset.codigo});
+      break;
+    case 'open-contratista':
+      navigate('contratistas',{contratistaDetalleId:el.dataset.id});
+      break;
+    case 'back-contratistas':
+      STATE.contratistaDetalleId = null;
+      render();
+      break;
+    case 'start-registro':{
+      const m = getMuro(el.dataset.codigo);
+      if(!m) return;
+      STATE.view='registrar';
+      resetFlow({zona:m.zona, piso:m.piso, muroCodigo:m.codigo, step:'evidencia'});
+      render();
+      break;
+    }
+    case 'hist-clear':
+      STATE.historial = { zona:'', contratista:'', muro:'', estado:'', desde:'', hasta:'' };
+      render();
+      break;
+    case 'elem-clear':
+      STATE.elementos = { zona:'', contratista:'', estado:'' };
+      render();
+      break;
+  }
+}
+
+function handleAppChange(e){
+  const el = e.target.closest('[data-action]');
+  if(!el) return;
+  const action = el.dataset.action;
+
+  if(action==='flow-field'){
+    const field = el.dataset.field;
+    STATE.flow[field] = el.value;
+    if(field==='zona'){ STATE.flow.piso=''; STATE.flow.muroCodigo=''; }
+    if(field==='piso'){ STATE.flow.muroCodigo=''; }
+    render();
+  } else if(action==='flow-file'){
+    const file = el.files && el.files[0];
+    readImageFile(file);
+  } else if(action==='hist-filter'){
+    STATE.historial[el.dataset.field] = el.value;
+    render();
+  } else if(action==='elem-filter'){
+    STATE.elementos[el.dataset.field] = el.value;
+    render();
+  }
+}
+
+function handleAppDrag(e){
+  const zone = e.target.closest && e.target.closest('#uploadZone');
+  if(!zone) return;
+  if(e.type==='dragover'){ e.preventDefault(); zone.classList.add('drag'); }
+  else if(e.type==='dragleave'){ zone.classList.remove('drag'); }
+  else if(e.type==='drop'){
+    e.preventDefault(); zone.classList.remove('drag');
+    const file = e.dataTransfer.files && e.dataTransfer.files[0];
+    readImageFile(file);
+  }
+}
+
+/* ---------------------------------------------------------
+   ARRANQUE
+   --------------------------------------------------------- */
+function initApp(){
+  const storedPw = sessionStorage.getItem('kappa_pw');
+  if(storedPw){ STATE.auth.loggedIn = true; STATE.auth.password = storedPw; }
+  const app = document.getElementById('app');
+  app.addEventListener('click', handleAppClick);
+  app.addEventListener('change', handleAppChange);
+  app.addEventListener('dragover', handleAppDrag);
+  app.addEventListener('dragleave', handleAppDrag);
+  app.addEventListener('drop', handleAppDrag);
+  render();
+}
+
+if(document.readyState==='loading'){
+  document.addEventListener('DOMContentLoaded', initApp);
+} else {
+  initApp();
+}
+
+</script>
+</body>
+</html>
