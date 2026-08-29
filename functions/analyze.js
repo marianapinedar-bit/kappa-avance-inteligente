@@ -36,7 +36,7 @@ export async function onRequestPost(context) {
   }
 
   // Fuerza el modelo desde el servidor (evita que el cliente lo cambie)
-  body.model = 'claude-sonnet-4-6';
+  body.model = 'claude-sonnet-5';
   if (!body.max_tokens) body.max_tokens = 700;
 
   let anthropicResponse;
