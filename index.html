@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>KAPPA · Avance Inteligente</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='1' y='1' width='30' height='30' rx='5' fill='rgb(15,36,54)' stroke='rgb(232,117,44)' stroke-width='2'/%3E%3Crect x='8' y='8' width='16' height='16' fill='none' stroke='rgb(232,117,44)' stroke-opacity='0.4' stroke-width='1.4'/%3E%3Ctext x='16' y='22' font-family='Arial,Helvetica,sans-serif' font-weight='800' font-size='15' fill='rgb(232,117,44)' text-anchor='middle'%3EK%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -361,13 +362,14 @@ textarea{resize:vertical; min-height:64px; font-family:var(--font-body);}
 .step-rule{width:38px; height:1px; background:var(--line-300); margin:0 8px;}
 
 .upload-zone{
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
   border:1.5px dashed var(--line-300); border-radius:var(--radius-lg);
   background:var(--concrete-50);
   padding:44px 24px; text-align:center; cursor:pointer;
   transition:border-color .12s ease, background .12s ease;
 }
 .upload-zone:hover, .upload-zone.drag{border-color:var(--safety-500); background:var(--safety-100);}
-.upload-zone .icn{margin:0 auto 14px;}
+.upload-zone .icn{margin-bottom:14px;}
 .upload-zone .icn svg{width:40px; height:40px; stroke:var(--steel-500);}
 .upload-title{font-weight:600; font-size:14px;}
 .upload-sub{font-size:12px; color:var(--steel-500); margin-top:4px;}
@@ -503,8 +505,71 @@ textarea{resize:vertical; min-height:64px; font-family:var(--font-body);}
 .stat-mini .sm-label{font-family:var(--font-mono); font-size:10px; text-transform:uppercase; color:var(--steel-500); letter-spacing:.05em;}
 .stat-mini .sm-value{font-family:var(--font-display); font-weight:700; font-size:20px;}
 
-.sidebar-toggle-btn{display:none;}
-.sidebar-backdrop{display:none;}
+/* ---------- LOGIN ---------- */
+.login-screen{min-height:100vh; display:flex; background:var(--ink-900);}
+.login-visual{
+  flex:1.15; position:relative; overflow:hidden;
+  background:
+    radial-gradient(680px 480px at 8% -10%, rgba(232,117,44,0.14) 0%, rgba(232,117,44,0) 60%),
+    radial-gradient(520px 520px at 100% 100%, rgba(37,99,166,0.16) 0%, rgba(37,99,166,0) 60%),
+    linear-gradient(165deg, var(--ink-800) 0%, var(--ink-900) 55%, #0A1B29 100%);
+  color:#EAF0F4;
+  display:flex; flex-direction:column; justify-content:space-between;
+  padding:52px 56px;
+}
+.login-visual::before{
+  content:""; position:absolute; inset:0;
+  background-image:linear-gradient(rgba(255,255,255,0.028) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.028) 1px, transparent 1px);
+  background-size:34px 34px;
+  -webkit-mask-image:linear-gradient(180deg, rgba(0,0,0,0.9), rgba(0,0,0,0.15));
+  mask-image:linear-gradient(180deg, rgba(0,0,0,0.9), rgba(0,0,0,0.15));
+  pointer-events:none;
+}
+.login-watermark{position:absolute; right:-58px; bottom:-58px; width:300px; height:300px; opacity:0.055; pointer-events:none;}
+.login-watermark svg{width:100%; height:100%; stroke:#fff; fill:none;}
+.login-visual-top{display:flex; align-items:center; gap:12px; position:relative;}
+.login-visual-top .brand-mark{width:40px; height:40px; font-size:17px;}
+.login-visual-top .name{font-family:var(--font-display); font-weight:700; font-size:18px; letter-spacing:0.02em;}
+.login-visual-top .sub{font-size:11px; color:var(--steel-300); font-family:var(--font-mono); letter-spacing:0.04em; margin-top:2px;}
+.login-visual-mid{position:relative; max-width:420px;}
+.login-visual-mid .lv-eyebrow{display:flex; align-items:center; gap:10px; font-family:var(--font-mono); font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--safety-500); margin-bottom:18px;}
+.login-visual-mid .lv-eyebrow::before{content:""; width:22px; height:1px; background:var(--safety-500);}
+.login-visual-mid h1{font-size:34px; line-height:1.24; font-weight:700; color:#fff; letter-spacing:-0.01em;}
+.login-visual-mid p{margin-top:16px; font-size:13.5px; line-height:1.65; color:var(--steel-300); max-width:360px;}
+
+.login-form-col{
+  flex:1; display:flex; align-items:center; justify-content:center;
+  background:var(--concrete-100); padding:32px 24px; position:relative;
+}
+.login-card{
+  width:100%; max-width:378px; background:var(--paper);
+  border:1px solid var(--line-200); border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-pop);
+  padding:38px 36px 34px; position:relative; overflow:hidden;
+}
+.login-card::before{
+  content:""; position:absolute; top:0; left:0; right:0; height:3px;
+  background:linear-gradient(90deg,var(--safety-500),var(--safety-600) 60%,var(--ink-700));
+}
+.login-card .login-mobile-brand{display:none; align-items:center; gap:10px; margin-bottom:26px;}
+.login-card h2{font-size:21px; margin-bottom:6px;}
+.login-card .lc-sub{font-size:12.5px; color:var(--steel-500); margin-bottom:26px; line-height:1.5;}
+.login-field{position:relative; margin-bottom:6px;}
+.login-field .icn{position:absolute; left:13px; top:50%; transform:translateY(-50%); pointer-events:none;}
+.login-field .icn svg{width:15px; height:15px; stroke:var(--steel-400);}
+.login-field input{padding:12px 14px 12px 38px; border-radius:var(--radius-md); transition:border-color .15s ease, box-shadow .15s ease;}
+.login-field input:focus{border-color:var(--confidence-600); box-shadow:0 0 0 3px rgba(37,99,166,0.12);}
+.login-card .btn-primary{
+  margin-top:22px; padding:12px 18px; font-size:13.5px;
+  box-shadow:0 6px 16px rgba(200,97,30,0.24);
+}
+.login-card .btn-primary:hover{box-shadow:0 8px 20px rgba(200,97,30,0.32);}
+.login-card .btn-primary .icn svg{width:14px; height:14px; stroke:currentColor;}
+
+@media (max-width:860px){
+  .login-visual{display:none;}
+  .login-card .login-mobile-brand{display:flex;}
+}
 @media (max-width:860px){
   .sidebar{position:fixed; left:-260px; z-index:50; transition:left .2s ease;}
   .sidebar.open{left:0;}
@@ -585,6 +650,8 @@ const ICN = {
   menu:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>',
   wall:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V3h18v18"/><path d="M3 9h18M3 15h18M9 3v6M15 9v6M9 15v6"/></svg>',
   building:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 21V5a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v16"/><path d="M3 21h18M9 8h1M14 8h1M9 12h1M14 12h1M9 16h1M14 16h1"/></svg>',
+  lock:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="10.5" width="15" height="10" rx="1.6"/><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"/><circle cx="12" cy="15" r="1.5"/></svg>',
+  ruler:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 16.5 16.5 3l4.5 4.5L7.5 21 3 16.5Z"/><path d="M6.5 13 9 15.5M9.5 9.5 12 12M13 6 15.5 8.5"/></svg>',
 };
 function icon(name,cls){ return '<span class="icn '+(cls||'')+'">'+ICN[name]+'</span>'; }
 
@@ -1096,20 +1163,43 @@ function render(){
    LOGIN (protege el acceso a la app y al análisis con IA)
    --------------------------------------------------------- */
 function renderLogin(){
-  return '<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--concrete-100);padding:20px;">'+
-    '<div class="card card-pad" style="width:100%;max-width:360px;">'+
-      '<div style="display:flex;align-items:center;gap:10px;margin-bottom:18px;">'+
-        '<div class="brand-mark" style="border-color:var(--safety-500);">K</div>'+
-        '<div><div style="font-family:var(--font-display);font-weight:700;font-size:15.5px;">KAPPA</div>'+
-        '<div class="mono" style="font-size:10.5px;color:var(--steel-500);">AVANCE INTELIGENTE</div></div>'+
+  return '<div class="login-screen">'+
+
+    '<div class="login-visual">'+
+      '<div class="login-watermark">'+ICN.wall+'</div>'+
+      '<div class="login-visual-top">'+
+        '<div class="brand-mark">K</div>'+
+        '<div><div class="name">KAPPA</div><div class="sub">AVANCE INTELIGENTE</div></div>'+
       '</div>'+
-      '<div class="field"><label>Contraseña de acceso</label>'+
-        '<input type="password" id="loginPassword" placeholder="Ingresa la contraseña" '+(STATE.auth.checking?'disabled':'')+' '+
-        'onkeydown="if(event.key===\'Enter\') document.querySelector(\'[data-action=login-submit]\').click();"></div>'+
-      (STATE.auth.error ? '<p style="color:var(--alert-600);font-size:12.5px;margin:8px 0 0;">'+escapeHtml(STATE.auth.error)+'</p>' : '')+
-      '<button class="btn btn-primary" style="width:100%;margin-top:14px;" data-action="login-submit" '+(STATE.auth.checking?'disabled':'')+'>'+
-        (STATE.auth.checking?'Verificando…':'Ingresar')+'</button>'+
+      '<div class="login-visual-mid">'+
+        '<div class="lv-eyebrow">Plataforma de control de obra</div>'+
+        '<h1>Evidencia fotográfica,<br>verificada con IA.</h1>'+
+        '<p>Registra el avance en obra, deja que el análisis automático estime el porcentaje construido y valida cada resultado antes de que quede en el histórico del proyecto.</p>'+
+      '</div>'+
     '</div>'+
+
+    '<div class="login-form-col">'+
+      '<div class="login-card">'+
+        '<div class="login-mobile-brand">'+
+          '<div class="brand-mark" style="border-color:var(--safety-500);">K</div>'+
+          '<div><div style="font-family:var(--font-display);font-weight:700;font-size:15.5px;">KAPPA</div>'+
+          '<div class="mono" style="font-size:10.5px;color:var(--steel-500);">AVANCE INTELIGENTE</div></div>'+
+        '</div>'+
+        '<h2>Bienvenido de nuevo</h2>'+
+        '<p class="lc-sub">Ingresa la contraseña para continuar.</p>'+
+        (STATE.auth.error ? '<div class="alert-banner" style="margin-bottom:16px;">'+icon('alert')+
+          '<div><div class="at">No se pudo iniciar sesión</div><div class="ad">'+escapeHtml(STATE.auth.error)+'</div></div></div>' : '')+
+        '<div class="field"><label>Contraseña de acceso</label>'+
+          '<div class="login-field">'+icon('lock')+
+            '<input type="password" id="loginPassword" placeholder="Ingresa la contraseña" autofocus '+(STATE.auth.checking?'disabled':'')+' '+
+            'onkeydown="if(event.key===\'Enter\') document.querySelector(\'[data-action=login-submit]\').click();">'+
+          '</div>'+
+        '</div>'+
+        '<button class="btn btn-primary btn-block" data-action="login-submit" '+(STATE.auth.checking?'disabled':'')+'>'+
+          (STATE.auth.checking? 'Verificando…' : icon('check')+' Ingresar')+'</button>'+
+      '</div>'+
+    '</div>'+
+
   '</div>';
 }
 
