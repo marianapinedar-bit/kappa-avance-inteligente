@@ -2450,22 +2450,22 @@ function renderElementos(){
 function renderContratistas(){
   if(STATE.contratistaDetalleId) return renderContratistaDetalle(STATE.contratistaDetalleId);
   const datos = validadoPorContratista();
-  return '<div class="grid grid-3">'+
+  const tabla = '<div class="table-wrap"><table><thead><tr><th>Contratista</th><th>Actividad</th><th class="num">Área asignada</th><th class="num">Área validada</th><th class="num">Avance</th><th class="num">Pendientes</th></tr></thead><tbody>'+
     datos.map(function(d){
       const pct = d.total>0? (d.val/d.total*100):0;
-      return '<div class="card card-pad row-link" data-action="open-contratista" data-id="'+d.contratista.id+'" style="border-left:3px solid '+accentFor(d.contratista.id)+';">'+
-        '<div class="card-eyebrow">'+d.contratista.actividad+'</div>'+
-        '<h3 style="font-size:16px;margin-bottom:10px;">'+d.contratista.nombre+'</h3>'+
-        '<div class="readonly-grid" style="grid-template-columns:1fr 1fr;">'+
-          '<div class="readonly-item"><div class="rl-label">Área asignada</div><div class="rl-value small">'+fmtArea(d.total)+' m²</div></div>'+
-          '<div class="readonly-item"><div class="rl-label">Área validada</div><div class="rl-value small">'+fmtArea(d.val)+' m²</div></div>'+
-        '</div>'+
-        '<div style="margin-top:12px;">'+progressBar(pct,{cls:'validate'})+'</div>'+
-        '<div style="display:flex;justify-content:space-between;margin-top:8px;font-size:11.5px;color:var(--steel-500);">'+
-          '<span>Avance '+fmtPct(pct)+' %</span><span>'+d.pendientes+' pendiente'+(d.pendientes===1?'':'s')+'</span>'+
-        '</div>'+
-      '</div>';
+      return '<tr class="row-link" data-action="open-contratista" data-id="'+d.contratista.id+'">'+
+        '<td style="font-weight:600;">'+d.contratista.nombre+'</td>'+
+        '<td class="cell-muted">'+d.contratista.actividad+'</td>'+
+        '<td class="num mono">'+fmtArea(d.total)+' m²</td>'+
+        '<td class="num mono">'+fmtArea(d.val)+' m²</td>'+
+        '<td class="num mono">'+fmtPct(pct)+' %</td>'+
+        '<td class="num mono">'+d.pendientes+'</td>'+
+      '</tr>';
     }).join('')+
+    '</tbody></table></div>';
+  return '<div class="card card-pad">'+
+    '<div class="card-head"><span class="card-title">'+datos.length+' contratista'+(datos.length===1?'':'s')+' con actividad registrada</span></div>'+
+    tabla+
   '</div>';
 }
 
