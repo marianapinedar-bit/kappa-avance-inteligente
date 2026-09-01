@@ -509,38 +509,18 @@ textarea{resize:vertical; min-height:64px; font-family:var(--font-body);}
 .stat-mini .sm-value{font-family:var(--font-display); font-weight:700; font-size:20px;}
 
 /* ---------- LOGIN ---------- */
-.login-screen{min-height:100vh; display:flex; background:var(--ink-900);}
-.login-visual{
-  flex:1.15; position:relative; overflow:hidden;
-  background:
-    radial-gradient(680px 480px at 8% -10%, rgba(232,117,44,0.14) 0%, rgba(232,117,44,0) 60%),
-    radial-gradient(520px 520px at 100% 100%, rgba(37,99,166,0.16) 0%, rgba(37,99,166,0) 60%),
-    linear-gradient(165deg, var(--ink-800) 0%, var(--ink-900) 55%, #0A1B29 100%);
-  color:#EAF0F4;
-  display:flex; flex-direction:column; justify-content:space-between;
-  padding:52px 56px;
+.login-screen{
+  min-height:100vh; display:flex; align-items:center; justify-content:center;
+  background-color:var(--ink-900);
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='40'><path d='M0 0H80M0 20H80M0 0V20M40 0V20M80 0V20M20 20V40M60 20V40' stroke='rgba(255,255,255,0.06)' stroke-width='1' fill='none'/></svg>");
+  padding:24px;
 }
-.login-visual::before{
-  content:""; position:absolute; inset:0;
-  background-image:linear-gradient(rgba(255,255,255,0.028) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.028) 1px, transparent 1px);
-  background-size:34px 34px;
-  -webkit-mask-image:linear-gradient(180deg, rgba(0,0,0,0.9), rgba(0,0,0,0.15));
-  mask-image:linear-gradient(180deg, rgba(0,0,0,0.9), rgba(0,0,0,0.15));
-  pointer-events:none;
-}
-.login-watermark{position:absolute; right:-58px; bottom:-58px; width:300px; height:300px; opacity:0.055; pointer-events:none;}
-.login-watermark svg{width:100%; height:100%; stroke:#fff; fill:none;}
-.login-visual-top{display:flex; align-items:center; gap:12px; position:relative;}
-.login-visual-top .brand-mark{width:40px; height:40px; font-size:17px;}
-.login-visual-top .name{font-family:var(--font-display); font-weight:700; font-size:18px; letter-spacing:0.02em;}
-.login-visual-top .sub{font-size:11px; color:var(--steel-300); font-family:var(--font-mono); letter-spacing:0.04em; margin-top:2px;}
-
-.login-form-col{
-  flex:1; display:flex; align-items:center; justify-content:center;
-  background:var(--concrete-100); padding:32px 24px; position:relative;
-}
+.login-center{display:flex; flex-direction:column; align-items:center; width:100%; max-width:378px;}
+.login-brand{display:flex; align-items:center; gap:10px; margin-bottom:24px;}
+.login-brand .brand-mark{width:38px; height:38px; font-size:16px;}
+.login-brand .name{font-family:var(--font-display); font-weight:700; font-size:19px; color:#fff; letter-spacing:0.02em;}
 .login-card{
-  width:100%; max-width:378px; background:var(--paper);
+  width:100%; background:var(--paper);
   border:1px solid var(--line-200); border-radius:var(--radius-lg);
   box-shadow:var(--shadow-pop);
   padding:38px 36px 34px; position:relative; overflow:hidden;
@@ -549,7 +529,6 @@ textarea{resize:vertical; min-height:64px; font-family:var(--font-body);}
   content:""; position:absolute; top:0; left:0; right:0; height:3px;
   background:linear-gradient(90deg,var(--safety-500),var(--safety-600) 60%,var(--ink-700));
 }
-.login-card .login-mobile-brand{display:none; align-items:center; gap:10px; margin-bottom:26px;}
 .login-card h2{font-size:21px; margin-bottom:6px;}
 .login-card .lc-sub{font-size:12.5px; color:var(--steel-500); margin-bottom:26px; line-height:1.5;}
 .login-field{position:relative; margin-bottom:6px;}
@@ -564,10 +543,6 @@ textarea{resize:vertical; min-height:64px; font-family:var(--font-body);}
 .login-card .btn-primary:hover{box-shadow:0 8px 20px rgba(200,97,30,0.32);}
 .login-card .btn-primary .icn svg{width:14px; height:14px; stroke:currentColor;}
 
-@media (max-width:860px){
-  .login-visual{display:none;}
-  .login-card .login-mobile-brand{display:flex;}
-}
 @media (max-width:860px){
   .sidebar{position:fixed; left:-260px; z-index:50; transition:left .2s ease;}
   .sidebar.open{left:0;}
@@ -1114,7 +1089,7 @@ function renderTopbar(){
     '</div>'+
     '<div class="topbar-right">'+
       '<button class="btn btn-primary btn-sm" data-action="nav" data-view="registrar">'+icon('registrar')+' Nuevo registro</button>'+
-      '<div class="user-chip"><div class="user-avatar">CR</div><div><div class="who">Camila Rojas</div><div class="role">Ing. Residente</div></div></div>'+
+      '<div class="user-chip"><div class="user-avatar">RC</div><div><div class="who">Roberto Cárdenas</div><div class="role">Residente</div></div></div>'+
     '</div>'+
   '</header>';
 }
@@ -1160,21 +1135,12 @@ function render(){
    --------------------------------------------------------- */
 function renderLogin(){
   return '<div class="login-screen">'+
-
-    '<div class="login-visual">'+
-      '<div class="login-watermark">'+ICN.wall+'</div>'+
-      '<div class="login-visual-top">'+
+    '<div class="login-center">'+
+      '<div class="login-brand">'+
         '<div class="brand-mark">L</div>'+
-        '<div><div class="name">Ladrix</div></div>'+
+        '<div class="name">Ladrix</div>'+
       '</div>'+
-    '</div>'+
-
-    '<div class="login-form-col">'+
       '<div class="login-card">'+
-        '<div class="login-mobile-brand">'+
-          '<div class="brand-mark" style="border-color:var(--safety-500);">L</div>'+
-          '<div><div style="font-family:var(--font-display);font-weight:700;font-size:15.5px;">Ladrix</div></div>'+
-        '</div>'+
         '<h2>Bienvenido de nuevo</h2>'+
         '<p class="lc-sub">Ingresa la contraseña para continuar.</p>'+
         (STATE.auth.error ? '<div class="alert-banner" style="margin-bottom:16px;">'+icon('alert')+
@@ -2109,13 +2075,13 @@ function submitValidation(mode){
     if(!motivo){ showToast('error','Indica un motivo para rechazar el análisis.'); return; }
     if(reviewing){
       const reg = d.reg;
-      reg.estado='Rechazado'; reg.cantidadValidada=0; reg.observaciones=motivo; reg.responsable='Camila Rojas';
+      reg.estado='Rechazado'; reg.cantidadValidada=0; reg.observaciones=motivo; reg.responsable='Roberto Cárdenas';
     } else {
       const reg = {
         id:uid('REG'), fecha:new Date(), muroCodigo:muro.codigo, contratistaId:muro.contratistaId,
         avanceAnterior:d.avanceAnterior, avanceDetectado:d.avanceDetectado, confianza:d.confianza,
         areaTotal:d.areaTotal, areaEstimadaAcum:d.areaEstimadaAcum, nuevaCantidadEstimada:d.nuevaCantidadEstimada,
-        cantidadValidada:0, estado:'Rechazado', responsable:'Camila Rojas', observaciones:motivo,
+        cantidadValidada:0, estado:'Rechazado', responsable:'Roberto Cárdenas', observaciones:motivo,
         descripcion:d.descripcion, limitaciones:d.limitaciones, requiereRevision:d.requiereRevision, clasificacion:d.clasificacion,
         imagen:d.imagen, tiempoValidacionMin:null, origen:'live',
       };
@@ -2142,7 +2108,7 @@ function submitValidation(mode){
 
   if(reviewing){
     const reg = d.reg;
-    reg.estado=estadoFinal; reg.cantidadValidada=cantidadFinal; reg.observaciones=obs; reg.responsable='Camila Rojas';
+    reg.estado=estadoFinal; reg.cantidadValidada=cantidadFinal; reg.observaciones=obs; reg.responsable='Roberto Cárdenas';
     reg.tiempoValidacionMin = 2 + (hashStr(reg.id)%9);
     if(estadoFinal==='Validado'||estadoFinal==='Ajustado') recomputeMuroAggregates(muro);
   } else {
@@ -2150,7 +2116,7 @@ function submitValidation(mode){
       id:uid('REG'), fecha:new Date(), muroCodigo:muro.codigo, contratistaId:muro.contratistaId,
       avanceAnterior:d.avanceAnterior, avanceDetectado:d.avanceDetectado, confianza:d.confianza,
       areaTotal:d.areaTotal, areaEstimadaAcum:d.areaEstimadaAcum, nuevaCantidadEstimada:d.nuevaCantidadEstimada,
-      cantidadValidada:cantidadFinal, estado:estadoFinal, responsable:'Camila Rojas', observaciones:obs,
+      cantidadValidada:cantidadFinal, estado:estadoFinal, responsable:'Roberto Cárdenas', observaciones:obs,
       descripcion:d.descripcion, limitaciones:d.limitaciones, requiereRevision:d.requiereRevision, clasificacion:d.clasificacion,
       imagen:d.imagen, tiempoValidacionMin: STATE.flow.analysisDoneAt ? Math.max(0.5, Math.round((Date.now()-STATE.flow.analysisDoneAt)/6000)/10) : null,
       origen:'live',
