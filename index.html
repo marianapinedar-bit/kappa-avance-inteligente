@@ -525,7 +525,7 @@ textarea{resize:vertical; min-height:64px; font-family:var(--font-body);}
 .login-brand .brand-mark{width:38px; height:38px; font-size:16px;}
 .login-brand .name{font-family:var(--font-display); font-weight:700; font-size:19px; color:#fff; letter-spacing:0.02em;}
 .login-card{
-  width:100%; background:var(--paper);
+  width:100%; background:var(--paper); text-align:center;
   border:1px solid var(--line-200); border-radius:var(--radius-lg);
   box-shadow:var(--shadow-pop);
   padding:38px 36px 34px; position:relative; overflow:hidden;
@@ -536,10 +536,11 @@ textarea{resize:vertical; min-height:64px; font-family:var(--font-body);}
 }
 .login-card h2{font-size:21px; margin-bottom:6px;}
 .login-card .lc-sub{font-size:12.5px; color:var(--steel-500); margin-bottom:26px; line-height:1.5;}
-.login-field{position:relative; margin-bottom:6px;}
+.login-card .field{align-items:center;}
+.login-field{position:relative; margin-bottom:6px; width:100%;}
 .login-field .icn{position:absolute; left:13px; top:50%; transform:translateY(-50%); pointer-events:none;}
 .login-field .icn svg{width:15px; height:15px; stroke:var(--steel-400);}
-.login-field input{padding:12px 14px 12px 38px; border-radius:var(--radius-md); transition:border-color .15s ease, box-shadow .15s ease;}
+.login-field input{padding:12px 14px 12px 38px; border-radius:var(--radius-md); transition:border-color .15s ease, box-shadow .15s ease; text-align:left;}
 .login-field input:focus{border-color:var(--confidence-600); box-shadow:0 0 0 3px rgba(37,99,166,0.12);}
 .login-card .btn-primary{
   margin-top:22px; padding:12px 18px; font-size:13.5px;
