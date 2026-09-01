@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KAPPA · Avance Inteligente</title>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='1' y='1' width='30' height='30' rx='5' fill='rgb(15,36,54)' stroke='rgb(232,117,44)' stroke-width='2'/%3E%3Crect x='8' y='8' width='16' height='16' fill='none' stroke='rgb(232,117,44)' stroke-opacity='0.4' stroke-width='1.4'/%3E%3Ctext x='16' y='22' font-family='Arial,Helvetica,sans-serif' font-weight='800' font-size='15' fill='rgb(232,117,44)' text-anchor='middle'%3EK%3C/text%3E%3C/svg%3E">
+<title>Ladrix</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='1' y='1' width='30' height='30' rx='5' fill='rgb(15,36,54)' stroke='rgb(232,117,44)' stroke-width='2'/%3E%3Crect x='8' y='8' width='16' height='16' fill='none' stroke='rgb(232,117,44)' stroke-opacity='0.4' stroke-width='1.4'/%3E%3Ctext x='16' y='22' font-family='Arial,Helvetica,sans-serif' font-weight='800' font-size='15' fill='rgb(232,117,44)' text-anchor='middle'%3EL%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 /* =========================================================
-   KAPPA · AVANCE INTELIGENTE — DESIGN TOKENS
+   LADRIX — DESIGN TOKENS
    Blueprint navy + safety orange + concrete gray.
    Inspired by construction drawings, site signage and
    measurement instruments. Deliberately unrounded, quiet,
@@ -587,7 +587,7 @@ textarea{resize:vertical; min-height:64px; font-family:var(--font-body);}
 <div id="app"></div>
 <script>
 /* =========================================================
-   KAPPA · AVANCE INTELIGENTE
+   LADRIX
    Prototipo funcional — control de avance de mampostería
    apoyado en evidencia fotográfica y análisis por IA.
    Todo el estado vive en memoria (sin backend, sin storage).
@@ -656,9 +656,9 @@ const ICN = {
 function icon(name,cls){ return '<span class="icn '+(cls||'')+'">'+ICN[name]+'</span>'; }
 
 /* ---------------------------------------------------------
-   MODELO DE DATOS — DEMO "PROYECTO PILOTO KAPPA"
+   MODELO DE DATOS — DEMO "PROYECTO PILOTO LADRIX"
    --------------------------------------------------------- */
-const PROYECTO = { nombre:'Proyecto Piloto Kappa', ubicacion:'Rionegro, Antioquia' };
+const PROYECTO = { nombre:'Proyecto Piloto Ladrix', ubicacion:'Rionegro, Antioquia' };
 /* Lista de proyectos disponibles para el flujo de registro flexible.
    Empieza con el proyecto piloto; el usuario puede añadir nuevos desde
    "Registrar avance → + Registrar nuevo elemento". */
@@ -1067,15 +1067,15 @@ const NAV_ITEMS = [
 ];
 
 const VIEW_META = {
-  'dashboard':{crumbs:'KAPPA / Panel general', title:'Dashboard'},
-  'registrar':{crumbs:'KAPPA / Registrar avance', title:'Registrar avance de mampostería'},
-  'analisis-ia':{crumbs:'KAPPA / Módulo de IA', title:'Análisis por inteligencia artificial'},
-  'pendientes':{crumbs:'KAPPA / Control de avance', title:'Validaciones pendientes'},
-  'historial':{crumbs:'KAPPA / Control de avance', title:'Historial de avances'},
-  'contratistas':{crumbs:'KAPPA / Terceros', title:'Contratistas'},
-  'elementos':{crumbs:'KAPPA / Catálogo', title:'Elementos constructivos'},
-  'reportes':{crumbs:'KAPPA / Analítica', title:'Reportes y consolidación'},
-  'muro-detalle':{crumbs:'KAPPA / Elementos constructivos', title:'Ficha del elemento'},
+  'dashboard':{crumbs:'Ladrix / Panel general', title:'Dashboard'},
+  'registrar':{crumbs:'Ladrix / Registrar avance', title:'Registrar avance de mampostería'},
+  'analisis-ia':{crumbs:'Ladrix / Módulo de IA', title:'Análisis por inteligencia artificial'},
+  'pendientes':{crumbs:'Ladrix / Control de avance', title:'Validaciones pendientes'},
+  'historial':{crumbs:'Ladrix / Control de avance', title:'Historial de avances'},
+  'contratistas':{crumbs:'Ladrix / Terceros', title:'Contratistas'},
+  'elementos':{crumbs:'Ladrix / Catálogo', title:'Elementos constructivos'},
+  'reportes':{crumbs:'Ladrix / Analítica', title:'Reportes y consolidación'},
+  'muro-detalle':{crumbs:'Ladrix / Elementos constructivos', title:'Ficha del elemento'},
 };
 
 function pendientesCount(){ return REGISTROS.filter(function(r){return r.estado==='Pendiente';}).length; }
@@ -1091,8 +1091,8 @@ function renderSidebar(){
   }).join('');
   return '<aside class="sidebar'+(STATE.sidebarOpen?' open':'')+'">'+
     '<div class="sidebar-brand">'+
-      '<div class="brand-mark">K</div>'+
-      '<div class="brand-text"><span class="name">KAPPA</span><span class="sub">AVANCE INTELIGENTE</span></div>'+
+      '<div class="brand-mark">L</div>'+
+      '<div class="brand-text"><span class="name">Ladrix</span></div>'+
     '</div>'+
     '<div class="sidebar-project">'+
       '<div class="label">Proyecto activo</div>'+
@@ -1100,8 +1100,7 @@ function renderSidebar(){
     '</div>'+
     '<nav class="sidebar-nav">'+items+'</nav>'+
     '<div class="sidebar-foot">'+
-      '<b>La IA estima. El ingeniero valida.</b><br>El sistema registra.<br>'+
-      '<button class="btn-ghost btn" data-action="logout" style="margin-top:10px;padding:4px 8px;font-size:11px;color:var(--steel-300);">Cerrar sesión</button>'+
+      '<button class="btn-ghost btn" data-action="logout" style="padding:4px 8px;font-size:11px;color:var(--steel-300);">Cerrar sesión</button>'+
     '</div>'+
   '</aside>';
 }
@@ -1168,8 +1167,8 @@ function renderLogin(){
     '<div class="login-visual">'+
       '<div class="login-watermark">'+ICN.wall+'</div>'+
       '<div class="login-visual-top">'+
-        '<div class="brand-mark">K</div>'+
-        '<div><div class="name">KAPPA</div><div class="sub">AVANCE INTELIGENTE</div></div>'+
+        '<div class="brand-mark">L</div>'+
+        '<div><div class="name">Ladrix</div></div>'+
       '</div>'+
       '<div class="login-visual-mid">'+
         '<div class="lv-eyebrow">Plataforma de control de obra</div>'+
@@ -1181,9 +1180,8 @@ function renderLogin(){
     '<div class="login-form-col">'+
       '<div class="login-card">'+
         '<div class="login-mobile-brand">'+
-          '<div class="brand-mark" style="border-color:var(--safety-500);">K</div>'+
-          '<div><div style="font-family:var(--font-display);font-weight:700;font-size:15.5px;">KAPPA</div>'+
-          '<div class="mono" style="font-size:10.5px;color:var(--steel-500);">AVANCE INTELIGENTE</div></div>'+
+          '<div class="brand-mark" style="border-color:var(--safety-500);">L</div>'+
+          '<div><div style="font-family:var(--font-display);font-weight:700;font-size:15.5px;">Ladrix</div></div>'+
         '</div>'+
         '<h2>Bienvenido de nuevo</h2>'+
         '<p class="lc-sub">Ingresa la contraseña para continuar.</p>'+
@@ -1216,7 +1214,7 @@ async function doLogin(){
     });
     const data = await resp.json().catch(function(){ return {}; });
     if(resp.ok && data.ok){
-      sessionStorage.setItem('kappa_pw', pw);
+      sessionStorage.setItem('ladrix_pw', pw);
       STATE.auth = { loggedIn:true, password:pw, checking:false, error:null };
       render();
     } else {
@@ -1230,7 +1228,7 @@ async function doLogin(){
 }
 
 function logout(){
-  sessionStorage.removeItem('kappa_pw');
+  sessionStorage.removeItem('ladrix_pw');
   STATE.auth = { loggedIn:false, password:'', checking:false, error:null };
   render();
 }
@@ -2188,7 +2186,7 @@ function renderAnalisisIA(){
       '<div class="grid" style="grid-template-columns:1.3fr 1fr;gap:24px;align-items:center;">'+
         '<div>'+
           '<div class="card-eyebrow">Módulo de inteligencia artificial</div>'+
-          '<h3 style="font-size:20px;margin-bottom:8px;">La IA estima. El ingeniero valida. El sistema registra.</h3>'+
+          '<h3 style="font-size:20px;margin-bottom:8px;">Estimación de avance con apoyo de análisis de imagen</h3>'+
           '<p style="color:var(--steel-500);font-size:13px;line-height:1.6;max-width:52ch;">El módulo envía la fotografía cargada, junto con el contexto del elemento, a un modelo de IA con visión multimodal para obtener una <b>estimación</b> de apoyo — no una medición exacta. El resultado siempre queda sujeto a validación humana antes de registrarse como avance oficial.</p>'+
           '<button class="btn btn-primary" style="margin-top:16px;" data-action="nav" data-view="registrar">'+icon('registrar')+' Iniciar nuevo análisis</button>'+
         '</div>'+
@@ -2755,7 +2753,7 @@ function handleAppDrag(e){
    ARRANQUE
    --------------------------------------------------------- */
 function initApp(){
-  const storedPw = sessionStorage.getItem('kappa_pw');
+  const storedPw = sessionStorage.getItem('ladrix_pw');
   if(storedPw){ STATE.auth.loggedIn = true; STATE.auth.password = storedPw; }
   const app = document.getElementById('app');
   app.addEventListener('click', handleAppClick);
