@@ -512,7 +512,12 @@ textarea{resize:vertical; min-height:64px; font-family:var(--font-body);}
 .login-screen{
   width:100%; min-height:100vh; display:flex; align-items:center; justify-content:center;
   background-color:var(--ink-900);
-  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='40'><path d='M0 0H80M0 20H80M0 0V20M40 0V20M80 0V20M20 20V40M60 20V40' stroke='rgba(255,255,255,0.06)' stroke-width='1' fill='none'/></svg>");
+  background-image:
+    radial-gradient(120% 90% at 50% 10%, rgba(255,255,255,0.05), rgba(255,255,255,0) 50%),
+    radial-gradient(140% 120% at 50% 100%, rgba(0,0,0,0.4), rgba(0,0,0,0) 60%),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='64' height='32'><rect x='1' y='1' width='30' height='14' rx='1' fill='rgba(255,255,255,0.032)'/><rect x='33' y='1' width='30' height='14' rx='1' fill='rgba(255,255,255,0.024)'/><rect x='0' y='17' width='15' height='14' rx='1' fill='rgba(255,255,255,0.026)'/><rect x='17' y='17' width='30' height='14' rx='1' fill='rgba(255,255,255,0.03)'/><rect x='49' y='17' width='15' height='14' rx='1' fill='rgba(255,255,255,0.026)'/></svg>");
+  background-size:cover, cover, 64px 32px;
+  background-repeat:no-repeat, no-repeat, repeat;
   padding:24px;
 }
 .login-center{display:flex; flex-direction:column; align-items:center; width:100%; max-width:378px;}
